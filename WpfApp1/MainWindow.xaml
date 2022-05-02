@@ -1,0 +1,272 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="547.5" Width="1100.15">
+    <Grid Margin="0,0,685,0">
+        <TabControl x:Name="tabControl" TabStripPlacement="Left" Margin="10,0,-678,10">
+            <TabItem x:Name="OUI" Header="Chantier" >
+                <Grid Margin="0,0,-6,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="127*"/>
+                        <ColumnDefinition Width="1534*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="dataChantier" CanUserSortColumns="True" 
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False" 
+                      AutoGenerateColumns="True"
+                      SelectionMode="Single" Margin="19,96,45,10" SelectionChanged="datagridjeff_SelectionChanged" Grid.ColumnSpan="2">
+                    </DataGrid>
+
+                    <ToggleButton x:Name="ToggleChantier" Height="30" Width="186" HorizontalAlignment="Left" Background="LightGreen" Grid.Column="1" Margin="688,27,0,444">
+                        <StackPanel>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Run Text="Créer un nouveau chantier" />
+
+                            </TextBlock>
+
+                            <Popup Name="myPopup" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}"             Placement="Center"
+            PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+            PopupAnimation="Slide">
+
+                                <Border BorderThickness="1">
+                                    <TextBlock Name="myPopupText" Background="LightBlue" Foreground="Blue" Padding="30" Width="507" Height="219">
+                Popup Text
+                                    </TextBlock>
+                                </Border>
+                            </Popup>
+                        </StackPanel>
+                    </ToggleButton>
+
+                    <RichTextBox x:Name="___Aucun_nom_"  HorizontalAlignment="Left" Height="23" Margin="39,24,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2" AutomationProperties.IsRowHeader="True">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="id_chantier" Text="jeffrey"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="68,65,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Name="adresse_chantier" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="173,65,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Name="chantier_com" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox  HorizontalAlignment="Left" Height="23" Margin="39,65,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2" TextChanged="RichTextBox_TextChanged">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Name="nom_chantier" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="39,-2,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Adresse" HorizontalAlignment="Left" Margin="68,39,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="NomChantier" HorizontalAlignment="Left" Margin="39,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Commentaire " HorizontalAlignment="Left" Margin="173.5,43,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Button Name="searchChantier" Click="searchChantier_Click" Content="Rechercher Chantier" HorizontalAlignment="Left" Margin="278,65,0,0" VerticalAlignment="Top" Width="157" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Facture">
+                <Grid Margin="0,0,-650,0">
+
+                    <DataGrid Name="datafacture" CanUserSortColumns="True" 
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False" 
+                      AutoGenerateColumns="True"
+                      SelectionMode="Single" Margin="16,96,-416,40" SelectionChanged="datagridjeff_SelectionChanged">
+                    </DataGrid>
+                    <ToggleButton x:Name="TogglePopupButton_Copy" Height="30" Width="186" HorizontalAlignment="Left" Background="LightGreen" Margin="815,27,0,444">
+                        <StackPanel>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="Créer un nouveau facture" /></TextBlock>
+
+                            <Popup x:Name="myPopup1" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}"             Placement="Center"
+                                PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                PopupAnimation="Slide">
+
+                                <Border BorderThickness="1">
+                                    <TextBlock x:Name="CreateFacture" Background="LightBlue" Foreground="Blue" Padding="30" Width="507" Height="219"><Run Text="Popup Text"/></TextBlock>
+                                </Border>
+                            </Popup>
+                        </StackPanel>
+                    </ToggleButton>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,24,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="id_facture"  Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="162,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="temps_effectif" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="300,65,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="facture_com" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="cout_effectif" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Rechercher" HorizontalAlignment="Left" Margin="415,65,0,0" VerticalAlignment="Top" Width="75" Click="searchFacture_Click"/>
+                    <Label Content="Temps effectif" HorizontalAlignment="Left" Margin="162,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Cout effectif" HorizontalAlignment="Left" Margin="39,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Commentaire " HorizontalAlignment="Left" Margin="300,43,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Devis">
+                <Grid Margin="0,0,-650,0">
+
+                    <DataGrid Name="datadevis" CanUserSortColumns="True" 
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False" 
+                      AutoGenerateColumns="True"
+                      SelectionMode="Single" Margin="16,96,-416,40" SelectionChanged="datagridjeff_SelectionChanged">
+                    </DataGrid>
+                    <ToggleButton x:Name="ToggleCreateDevis" Height="30" Width="186" HorizontalAlignment="Left" Background="LightGreen" Margin="815,27,0,444">
+                        <StackPanel>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="Créer un nouveau devis" /></TextBlock>
+
+                            <Popup x:Name="createDevispop" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}"             Placement="Center"
+                                PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                PopupAnimation="Slide">
+
+                                <Border BorderThickness="1">
+                                    <TextBlock x:Name="popcreatedevis" Background="LightBlue" Foreground="Blue" Padding="30" Width="507" Height="219"><Run Text="Popup Text"/></TextBlock>
+                                </Border>
+                            </Popup>
+                        </StackPanel>
+                    </ToggleButton>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,24,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="id_devis" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="162,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="cout_prevu" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="300,65,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="devis_com" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="32,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="temps_prevu"  Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Rechercher" HorizontalAlignment="Left" Margin="421,65,0,0" VerticalAlignment="Top" Width="75" Click="searchDevis_Click"/>
+                    <Label Content="Cout prévu" HorizontalAlignment="Left" Margin="162,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Temps prévu" HorizontalAlignment="Left" Margin="39,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Commentaire " HorizontalAlignment="Left" Margin="300,43,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Compagnon">
+                <Grid Margin="0,0,-650,0">
+
+                    <DataGrid Name="dataCompagnon" CanUserSortColumns="True" 
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False" 
+                      AutoGenerateColumns="True"
+                      SelectionMode="Single" Margin="16,96,-416,40" SelectionChanged="datagridjeff_SelectionChanged">
+                    </DataGrid>
+                    <ToggleButton x:Name="ToggleCreateCompagnon" Height="30" Width="186" HorizontalAlignment="Left" Background="LightGreen" Margin="815,27,0,444">
+                        <StackPanel>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="Créer un nouveau chantier" /></TextBlock>
+
+                            <Popup x:Name="createCompagnon" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}"             Placement="Center"
+                                PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                PopupAnimation="Slide">
+
+                                <Border BorderThickness="1">
+                                    <TextBlock x:Name="popcreateCompagnon" Background="LightBlue" Foreground="Blue" Padding="30" Width="507" Height="219"><Run Text="Popup Text"/></TextBlock>
+                                </Border>
+                            </Popup>
+                        </StackPanel>
+                    </ToggleButton>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,24,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="id_compagnon" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="162,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="name" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="300,65,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="cout_horaire" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="telephone" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="Search" Content="Rechercher" HorizontalAlignment="Left" Margin="693,64,0,0" VerticalAlignment="Top" Width="75" Click="searchCompagnons_Click"/>
+                    <Label Content="Nom" HorizontalAlignment="Left" Margin="162,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Téléphone" HorizontalAlignment="Left" Margin="39,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Cout horaire " HorizontalAlignment="Left" Margin="300,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Date embauche" HorizontalAlignment="Left" Margin="425,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Commentaire " HorizontalAlignment="Left" Margin="563,43,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="425,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="date_embauche" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="556,65,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="compagnon_com" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
