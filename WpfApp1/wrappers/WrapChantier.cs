@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using WpfApp1.modeles;
+using WpfApp1.modèles;
 
 namespace WpfApp1.wrappers
 {
@@ -21,7 +22,7 @@ namespace WpfApp1.wrappers
         {
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com) VALUES ('"+chantier._Adresse+"','"+chantier._NomChantier+"','"+chantier._Commentaire+"')";
+            sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com) VALUES ('"+chantier._Adresse+"','"+chantier._NomChantier+"','"+chantier._Commentaire+ "','" + chantier._factures + "','" + chantier._devis + "')";
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
             //sqlCommand.CommandText = "INSERT INTO chantier VALUES ('0','9 rue julien chavoutier', 'maison36', 'il existe pas');";
@@ -48,8 +49,29 @@ namespace WpfApp1.wrappers
                 {"@com", chantier._Commentaire }
             };
 
-            sqlCommand.CommandText = "UPDATE chantier SET adresse = @adresse, nom_chantier = @nom, chantier_com = @com WHERE Id = @id";
+            sqlCommand.CommandText = "UPDATE chantier SET adresse = @adresse, nom_chantier = @nom, chantier_com = @com WHERE Id == @id";
             sqlCommand.ExecuteNonQuery();
+            for (int i = 0; i < chantier._factures.Count; i++)
+            {
+                var args2 = new Dictionary<string,object>
+                {
+                    {"@id_chantier", chantier._Id},
+                    {"@id_facture", chantier._factures[i]},
+                };
+                sqlCommand.CommandText = "UPDATE chantier_xfacture SET id_facture = @id_facture, id_chantier = @id_chantier WHERE id_chantier ==@id_chantier&& id_facture==id_facture";
+                sqlCommand.ExecuteNonQuery();
+            }
+            for (int i = 0; i < chantier._devis.Count; i++)
+            {
+                var args2 = new Dictionary<string, object>
+                {
+                    {"@id_chantier", chantier._Id},
+                    {"@id_devis", chantier._factures[i]},
+                };
+                sqlCommand.CommandText = "UPDATE chantier_xdevis SET id_devis = @id_devis, id_chantier = @id_chantier WHERE id_chantier ==@id_chantier&& id_devis==id_devis";
+                sqlCommand.ExecuteNonQuery();
+            }
+
         }
         public void deleteChantier(Chantier chantier)
         {
@@ -128,9 +150,55 @@ namespace WpfApp1.wrappers
             chantier._Adresse = reader.GetString(1);
             chantier._NomChantier = reader.GetString(2);
             chantier._Commentaire = reader.GetString(3);
+            chantier._factures = getAllFactureForOneChantier(chantier._Id);
+            chantier._devis = getAlldevisForOneChantier(chantier._Id);
             return chantier;
         }
-        
+        private List<Devis> getAlldevisForOneChantier(int id)
+        {
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            List<int> listId = new List<int>();
+            sqlCommand.CommandText = "SELECT * FROM chantier_xdevis WHERE id_chantier=" + id;
+            SqliteDataReader reader = sqlCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int idGet = reader.GetInt32(1);
+                listId.Add(idGet);
+            }
+            WrapDevis wrapDevis = new WrapDevis();
+            List<Devis> listDevis = new List<Devis>();
+            for (int i = 0; i < listId.Count; i++)
+            {
+                Devis devis = wrapDevis.readDevis(listId[i]);
+                listDevis.Add(devis);
+            }
+            return listDevis;
+        }
+        private List<Facture> getAllFactureForOneChantier(int id)
+        {
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            List<int> listId = new List<int>();
+            sqlCommand.CommandText = "SELECT * FROM chantier_xfacture WHERE id_chantier=" + id;
+            SqliteDataReader reader = sqlCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int idGet = reader.GetInt32(1);
+                listId.Add(idGet);
+            }
+            WrapFacture wrapFacture = new WrapFacture();
+            List<Facture> listFacture = new List<Facture>();
+            for (int i = 0; i < listId.Count; i++)
+            {
+                Facture facture = wrapFacture.readFacture(listId[i]);
+                listFacture.Add(facture);
+            }
+            return listFacture;
+        }
+
         private void logChantierfromReader(SqliteDataReader reader)
         {
             while (reader.Read())

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.modèles;
+using WpfApp1.modeles;
 
 namespace WpfApp1.wrappers
 {
@@ -48,7 +49,18 @@ namespace WpfApp1.wrappers
 
             sqlCommand.CommandText = "UPDATE compagnon SET name = @name, telephone = @tel, cout_horaire = @ch , date_embauche = @DE, compagnon_com = @com WHERE Id = @id";
             sqlCommand.ExecuteNonQuery();
+            for (int i = 0; i < compagnon._Chantiers.Count; i++)
+            {
+                var args2 = new Dictionary<string, object>
+                {
+                    {"@id_compagnon", compagnon._Id},
+                    {"@id_chantier", compagnon._Chantiers[i]},
+                };
+                sqlCommand.CommandText = "UPDATE chantier_xcompagnon SET id_compagnon = @id_compagnon, id_chantier = @id_chantier WHERE id_chantier ==@id_chantier&& id_compagnon==id_compagnon";
+                sqlCommand.ExecuteNonQuery();
+            }
         }
+
         public void deleteCompagnon(int id)
         {
             sqlite_conn.Open();
@@ -110,9 +122,31 @@ namespace WpfApp1.wrappers
             compagnon._CoutHoraire = reader.GetInt32(3);
             compagnon._DateEmbauche = reader.GetString(4);
             compagnon._Commentaire = reader.GetString(5);
+            compagnon._Chantiers = getAllChantiersForOneCompagnon(compagnon._Id);
             return compagnon;
         }
+        private List<Chantier> getAllChantiersForOneCompagnon(int id)
+        {
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            List<int> listId = new List<int>();
+            sqlCommand.CommandText = "SELECT * FROM compagnon_xchantier WHERE id_compagnon=" + id;
+            SqliteDataReader reader = sqlCommand.ExecuteReader();
 
+            while (reader.Read())
+            {
+                int idGet = reader.GetInt32(1);
+                listId.Add(idGet);
+            }
+            WrapChantier wrapChantier = new WrapChantier();
+            List<Chantier> listChantiers = new List<Chantier>();
+            for (int i = 0; i < listId.Count; i++)
+            {
+                Chantier chantier = wrapChantier.readChantier(listId[i]);
+                listChantiers.Add(chantier);
+            }
+            return listChantiers;
+        }
         private void logCompagnonfromBDD(SqliteDataReader reader)
         {
             while (reader.Read())
