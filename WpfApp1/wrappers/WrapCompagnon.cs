@@ -22,6 +22,16 @@ namespace WpfApp1.wrappers
             sqlCommand.CommandText = "INSERT INTO compagnon VALUES ('" + compagnon._Id + "','" + compagnon._Name + "','" + compagnon._Telephone + "','" + compagnon._CoutHoraire + "','" + compagnon._DateEmbauche.ToString() + "','" + compagnon._Commentaire+"')";
             Console.WriteLine(sqlCommand.CommandText);
             SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            for (int i = 0; i < compagnon._Chantiers.Count; i++)
+            {
+                var args2 = new Dictionary<string, object>
+                {
+                    {"@id_chantier", compagnon._Id},
+                    {"@id_facture", compagnon._Chantiers[i]},
+                };
+                sqlCommand.CommandText = "INSERT INTO chantier_xchantier  (id_compagnon,id_chantier) VALUES ('" + compagnon._Chantiers[i] + "','" + compagnon._Id + "')";
+                sqlCommand.ExecuteNonQuery();
+            }
         }
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
         // et pareil our GetString()

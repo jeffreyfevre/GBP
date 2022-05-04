@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,18 @@ namespace WpfApp1.modeles
     class Chantier
     {
         public int _Id { get; set; }
+        public enum State 
+        {
+            // items of the enum
+            Inconnue=0,
+            [Description("En cours")]
+            Encours=1,    //0
+            Programmé=2,   //1
+            Terminé=3,      //2
+            Annulé=4,      //3
+                   
+        } 
+        public State _Etat { get; set; }
         public string _Adresse { get; set; }
         public string _NomChantier { get; set; }
         public string _Commentaire { get; set; }
@@ -26,9 +39,10 @@ namespace WpfApp1.modeles
         {
         }
 
-        public Chantier(int id, string adresse, string nomChantier, string commentaire, List<Devis> devis, List<Facture> factures)
+        public Chantier(int id, State etat, string adresse, string nomChantier, string commentaire, List<Devis> devis, List<Facture> factures)
         {
             _Id = id;
+            _Etat = etat;
             _Adresse = adresse;
             _NomChantier = nomChantier;
             _Commentaire = commentaire;

@@ -22,9 +22,29 @@ namespace WpfApp1.wrappers
         {
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com) VALUES ('"+chantier._Adresse+"','"+chantier._NomChantier+"','"+chantier._Commentaire+ "','" + chantier._factures + "','" + chantier._devis + "')";
+            sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com,etat) VALUES ('"+chantier._Adresse+"','"+chantier._NomChantier+"','"+chantier._Commentaire+ "','" + chantier._Etat + "')";
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
+            for (int i = 0; i < chantier._factures.Count; i++)
+            {
+                var args2 = new Dictionary<string, object>
+                {
+                    {"@id_chantier", chantier._Id},
+                    {"@id_facture", chantier._factures[i]},
+                };
+                sqlCommand.CommandText = "INSERT INTO chantier_xfacture  (id_facture,id_chantier) VALUES ('"+chantier._factures[i]+"','"+chantier._Id+"')";
+                sqlCommand.ExecuteNonQuery();
+            }
+            for (int i = 0; i < chantier._devis.Count; i++)
+            {
+                var args2 = new Dictionary<string, object>
+                {
+                    {"@id_chantier", chantier._Id},
+                    {"@id_devis", chantier._devis[i]},
+                };
+                sqlCommand.CommandText = "INSERT INTO chantier_xdevis  (id_devis,id_chantier) VALUES ('" + chantier._devis[i] + "','" + chantier._Id + "')";
+                sqlCommand.ExecuteNonQuery();
+            }
             //sqlCommand.CommandText = "INSERT INTO chantier VALUES ('0','9 rue julien chavoutier', 'maison36', 'il existe pas');";
         }
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
@@ -51,6 +71,7 @@ namespace WpfApp1.wrappers
 
             sqlCommand.CommandText = "UPDATE chantier SET adresse = @adresse, nom_chantier = @nom, chantier_com = @com WHERE Id == @id";
             sqlCommand.ExecuteNonQuery();
+            //pas tres beau
             for (int i = 0; i < chantier._factures.Count; i++)
             {
                 var args2 = new Dictionary<string,object>
@@ -58,17 +79,17 @@ namespace WpfApp1.wrappers
                     {"@id_chantier", chantier._Id},
                     {"@id_facture", chantier._factures[i]},
                 };
-                sqlCommand.CommandText = "UPDATE chantier_xfacture SET id_facture = @id_facture, id_chantier = @id_chantier WHERE id_chantier ==@id_chantier&& id_facture==id_facture";
-                sqlCommand.ExecuteNonQuery();
+                sqlCommand.CommandText = "UPDATE chantier_xfacture SET id_facture = @id_facture, id_chantier = @id_chantier WHERE id_chantier == @id_chantier&& id_facture==id_facture";
+                sqlCommand.ExecuteNonQuery(); 
             }
             for (int i = 0; i < chantier._devis.Count; i++)
             {
                 var args2 = new Dictionary<string, object>
                 {
                     {"@id_chantier", chantier._Id},
-                    {"@id_devis", chantier._factures[i]},
+                    {"@id_devis", chantier._devis[i]},
                 };
-                sqlCommand.CommandText = "UPDATE chantier_xdevis SET id_devis = @id_devis, id_chantier = @id_chantier WHERE id_chantier ==@id_chantier&& id_devis==id_devis";
+                sqlCommand.CommandText = "UPDATE chantier_xdevis SET id_devis = @id_devis, id_chantier = @id_chantier WHERE id_chantier == @id_chantier&& id_devis == id_devis";
                 sqlCommand.ExecuteNonQuery();
             }
 

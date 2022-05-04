@@ -123,6 +123,7 @@
     <Compile Include="controllers\FacturesController.cs" />
     <Compile Include="controllers\DevisController.cs" />
     <Compile Include="controllers\ChantierController.cs" />
+    <Compile Include="modeles\DisplayAttribute.cs" />
     <Compile Include="tests\person.cs" />
     <Compile Include="wrappers\WrapChantier.cs" />
     <Compile Include="wrappers\manageBDD.cs" />
