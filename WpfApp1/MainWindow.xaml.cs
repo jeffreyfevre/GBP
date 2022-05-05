@@ -18,6 +18,7 @@ using WpfApp1.tests;
 using WpfApp1.wrappers;
 using WpfApp1.wrapper;
 
+
 namespace WpfApp1
 {
     /// <summary>
@@ -48,6 +49,7 @@ namespace WpfApp1
             WrapCompagnon wrapCompagnon = new WrapCompagnon();
             compagnons = wrapCompagnon.getAllCompagnon();
             dataCompagnon.ItemsSource = compagnons;
+            
 
         }
 

@@ -19,5 +19,16 @@ namespace WpfApp1
             List<Chantier> lch = WC.searchChantierMultiParam(dicChantier);
             dataChantier.ItemsSource = lch;
         }
+
+        private void createChantier_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, string> dicChantier = new Dictionary<string, string>();
+            Chantier chant = new Chantier(0, nom_chantier_c.Text, adresse_chantier_c.Text, chantier_com_c.Text);
+            dicChantier.Add("nom_chantier", nom_chantier.Text);
+            dicChantier.Add("adresse", adresse_chantier.Text);
+            dicChantier.Add("chantier_com", chantier_com.Text);
+            WrapChantier WC = new WrapChantier();
+            WC.createChantier(chant);
+        }
     }
 }

@@ -205,7 +205,7 @@
                         <StackPanel>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"><Run Text="Créer un nouveau chantier" /></TextBlock>
 
-                            <Popup x:Name="createCompagnon" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}"             Placement="Center"
+                            <Popup x:Name="intefaceCreateCompagnon" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton}"             Placement="Center"
                                 PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                                 PopupAnimation="Slide">
 
@@ -267,6 +267,102 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="Create" Height="24" VerticalAlignment="Top">
+                <Grid Margin="0,0,-4,0">
+                    <Label Content="Création d'un nouveau Chantier" Margin="321,10,247,413" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Création d'un nouveau Chantier " Margin="393,10,1143,381"/>
+                    <RichTextBox x:Name="___Aucun_nom__"  HorizontalAlignment="Left" Height="23" Margin="51,151,0,0" VerticalAlignment="Top" Width="100" AutomationProperties.IsRowHeader="True">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="id_chantier_c" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="214,209,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Name="adresse_chantier_c" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="361,209,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Name="chantier_com_c" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox  HorizontalAlignment="Left" Height="23" Margin="51,209,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Name="nom_chantier_c" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="51,120,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Adresse" HorizontalAlignment="Left" Margin="214,171,0,0" VerticalAlignment="Top"/>
+                    <Label Content="NomChantier" HorizontalAlignment="Left" Margin="51,179,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Commentaire " HorizontalAlignment="Left" Margin="361,171,0,0" VerticalAlignment="Top"/>
+                    <Button Name="createChantier" Click="createChantier_Click" Content="Créer Chantier" HorizontalAlignment="Left" Margin="447,314,0,0" VerticalAlignment="Top" Width="157"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Create" Height="24" VerticalAlignment="Top">
+                <Grid Margin="0,0,-4,0">
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,24,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="id_compagnon_create" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="162,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="name_create" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="300,65,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="cout_horaire_create" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="39,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="telephone_create" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="createCompagnon" Content="Créer" HorizontalAlignment="Left" Margin="693,64,0,0" VerticalAlignment="Top" Width="75" Click="createCompagnons_Click"/>
+                    <Label Content="Nom" HorizontalAlignment="Left" Margin="162,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Téléphone" HorizontalAlignment="Left" Margin="39,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Cout horaire " HorizontalAlignment="Left" Margin="300,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Date embauche" HorizontalAlignment="Left" Margin="425,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Commentaire " HorizontalAlignment="Left" Margin="563,43,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="425,65,0,0" VerticalAlignment="Top" Width="100" TextChanged="RichTextBox_TextChanged_1">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="date_embauche_create" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox HorizontalAlignment="Left" Height="23" Margin="556,65,0,0" VerticalAlignment="Top" Width="100">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run x:Name="compagnon_com_create" Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+
+                </Grid>
+            </TabItem>
+
+
         </TabControl>
     </Grid>
 </Window>
