@@ -66,7 +66,7 @@ namespace WpfApp1.wrappers
                     {"@id_compagnon", compagnon._Id},
                     {"@id_chantier", compagnon._Chantiers[i]},
                 };
-                sqlCommand.CommandText = "UPDATE chantier_xcompagnon SET id_compagnon = @id_compagnon, id_chantier = @id_chantier WHERE id_chantier ==@id_chantier&& id_compagnon==id_compagnon";
+                sqlCommand.CommandText = "UPDATE chantier_xcompagnon SET id_compagnon = @id_compagnon, id_chantier = @id_chantier WHERE id_chantier =@id_chantier&& id_compagnon=id_compagnon";
                 sqlCommand.ExecuteNonQuery();
             }
         }
@@ -133,6 +133,7 @@ namespace WpfApp1.wrappers
             compagnon._DateEmbauche = reader.GetString(4);
             compagnon._Commentaire = reader.GetString(5);
             compagnon._Chantiers = getAllChantiersForOneCompagnon(compagnon._Id);
+            
             return compagnon;
         }
         private List<Chantier> getAllChantiersForOneCompagnon(int id)

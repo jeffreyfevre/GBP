@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using WpfApp1.modeles;
 using WpfApp1.modèles;
+using static WpfApp1.modeles.Chantier;
 
 namespace WpfApp1.wrappers
 {
@@ -69,7 +70,7 @@ namespace WpfApp1.wrappers
                 {"@com", chantier._Commentaire }
             };
 
-            sqlCommand.CommandText = "UPDATE chantier SET adresse = @adresse, nom_chantier = @nom, chantier_com = @com WHERE Id == @id";
+            sqlCommand.CommandText = "UPDATE chantier SET adresse = @adresse, nom_chantier = @nom, chantier_com = @com WHERE Id = @id";
             sqlCommand.ExecuteNonQuery();
             //pas tres beau
             for (int i = 0; i < chantier._factures.Count; i++)
@@ -79,7 +80,7 @@ namespace WpfApp1.wrappers
                     {"@id_chantier", chantier._Id},
                     {"@id_facture", chantier._factures[i]},
                 };
-                sqlCommand.CommandText = "UPDATE chantier_xfacture SET id_facture = @id_facture, id_chantier = @id_chantier WHERE id_chantier == @id_chantier&& id_facture==id_facture";
+                sqlCommand.CommandText = "UPDATE chantier_xfacture SET id_facture = @id_facture, id_chantier = @id_chantier WHERE id_chantier = @id_chantier&& id_facture=id_facture";
                 sqlCommand.ExecuteNonQuery(); 
             }
             for (int i = 0; i < chantier._devis.Count; i++)
@@ -89,7 +90,7 @@ namespace WpfApp1.wrappers
                     {"@id_chantier", chantier._Id},
                     {"@id_devis", chantier._devis[i]},
                 };
-                sqlCommand.CommandText = "UPDATE chantier_xdevis SET id_devis = @id_devis, id_chantier = @id_chantier WHERE id_chantier == @id_chantier&& id_devis == id_devis";
+                sqlCommand.CommandText = "UPDATE chantier_xdevis SET id_devis = @id_devis, id_chantier = @id_chantier WHERE id_chantier = @id_chantier&& id_devis = id_devis";
                 sqlCommand.ExecuteNonQuery();
             }
 
@@ -171,6 +172,7 @@ namespace WpfApp1.wrappers
             chantier._Adresse = reader.GetString(1);
             chantier._NomChantier = reader.GetString(2);
             chantier._Commentaire = reader.GetString(3);
+            chantier._Etat = (State)reader.GetInt32(4);
             chantier._factures = getAllFactureForOneChantier(chantier._Id);
             chantier._devis = getAlldevisForOneChantier(chantier._Id);
             return chantier;
