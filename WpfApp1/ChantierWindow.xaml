@@ -1,7 +1,8 @@
 ﻿<Window x:Class="WpfApp1.ChantierWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
@@ -30,21 +31,24 @@
                     <ImageBrush ImageSource="/resources/flo.jpg"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Image Grid.Column="1" Source="/resources/flo.jpg" RenderOptions.BitmapScalingMode="Fant">
+            <Image Grid.Column="1" Source="/resources/flo.jpg" RenderOptions.BitmapScalingMode="Fant" MouseDown="ChangePage">
             </Image>
         </Grid>
 
         <!--CONTENT-->
         <Grid Grid.Row="2">
             <StackPanel Grid.Row="0">
-                <Label Content="Nom"/>
-                <TextBox Margin="10,0,0,0" Text="piscine Durant Fontvielle" VerticalAlignment="Center" AcceptsReturn="False"  TextWrapping="NoWrap"/>
-                <Label Content="Adresse"/>
-                <TextBox Margin="10,0,0,0" Text="5 Rue de la Callade" VerticalAlignment="Center" AcceptsReturn="False"  TextWrapping="NoWrap"/>
-                <Label Content="Code postal"/>
-                <TextBox Margin="10,0,0,0" Text="13205" VerticalAlignment="Center" AcceptsReturn="False"  TextWrapping="NoWrap"/>
-                <Label Content="Tel"/>
-                <TextBox Margin="10,0,0,0" Text="0633512512" VerticalAlignment="Center" AcceptsReturn="False"  TextWrapping="NoWrap" />
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nom chantier" Text="{Binding Content}" Margin="8 0 0 0" VerticalAlignment="Bottom" />
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adresse du chantier" Text="{Binding Content}" Margin="8 0 0 0"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Code postal" Text="{Binding Content}" Margin="8 0 0 0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="9*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon  Kind="Phone" Grid.Column="0" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numéro tel" Text="{Binding Content}" Margin="8 0 0 0" Grid.Column="1" MaxLength="10" materialDesign:TransitionAssist.DisableTransitions="True"/>
+                </Grid>
                 <Label Content="Devis"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -52,15 +56,13 @@
                         <ColumnDefinition Width="9*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Text="30" Margin="10,0,0,0" VerticalAlignment="Center" AcceptsReturn="False"  TextWrapping="NoWrap" PreviewTextInput="HourRateTextInput"/>
-
                     <Label Content="€/H" Grid.Column="1"/>
                 </Grid>
                 <Label Content="Date Debut"/>
-                <DatePicker Margin="0,0,0,0" Background="AliceBlue"/>
+                <DatePicker Margin="0,0,0,0" materialDesign:HintAssist.Hint="Date Debut" Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 <Label Content="Date Fin"/>
-                <DatePicker Margin="0,0,0,0" Background="AliceBlue"/>
-                <Label Content="Commentaire" Grid.Row="1"/>
-                <TextBox Height="100"/>
+                <DatePicker Margin="0,0,0,0" materialDesign:HintAssist.Hint="Date Fin"  Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                <TextBox Height="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Commentaire" Text="{Binding Content}" Margin="8 0 0 0"/>
             </StackPanel>
         </Grid>
     </Grid>

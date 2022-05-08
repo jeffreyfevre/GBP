@@ -116,9 +116,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BuildWindow.xaml.cs">
-      <DependentUpon>BuildWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ChantierWindow.xaml.cs">
       <DependentUpon>ChantierWindow.xaml</DependentUpon>
     </Compile>
@@ -131,15 +128,14 @@
     </Compile>
     <Compile Include="modeles\DisplayAttribute.cs" />
     <Compile Include="tests\person.cs" />
+    <Compile Include="views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wrappers\WrapChantier.cs" />
     <Compile Include="wrappers\manageBDD.cs" />
     <Compile Include="wrappers\WrapCompagnon.cs" />
     <Compile Include="wrappers\WrapDevis.cs" />
     <Compile Include="wrappers\WrapFacture.cs" />
-    <Page Include="BuildWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ChantierWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +156,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="modeles\Chantier.cs" />
@@ -217,6 +217,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\naruto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\compagnon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="views\compagnon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="views\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\chantier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="views\chantier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\fournisseur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="views\fournisseur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="views\chantier.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -23,9 +23,9 @@ namespace WpfApp1
         }
         private void createCompagnons_Click(object sender, RoutedEventArgs e)
         {
-            Compagnon chant = new Compagnon(0, name_create.Text, int.Parse(telephone_create.Text), int.Parse(cout_horaire_create.Text), date_embauche_create.Text, compagnon_com_create.Text);
+            //Compagnon chant = new Compagnon(0, name_create.Text, int.Parse(telephone_create.Text), int.Parse(cout_horaire_create.Text), date_embauche_create.Text, compagnon_com_create.Text);
             WrapCompagnon WC = new WrapCompagnon();
-            WC.createCompagnon(chant);
+            //WC.createCompagnon(chant);
         }
     }
 }

@@ -49,5 +49,10 @@ namespace WpfApp1
                 e.Handled = true;
             }
         }
+
+        private void ChangePage(object sender, MouseButtonEventArgs e)
+        {
+            this.Content = new views.Home();
+        }
     }
 }
