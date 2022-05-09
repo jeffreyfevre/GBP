@@ -222,28 +222,13 @@
     <Resource Include="resources\compagnon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="views\compagnon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="views\home.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\chantier.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="views\chantier.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\fournisseur.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="views\fournisseur.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="views\chantier.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
