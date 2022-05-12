@@ -12,6 +12,7 @@ namespace WpfApp1.modèles
         public int _CoutHoraire { get; set; }
         public string _DateEmbauche { get; set; }
         public string _Commentaire { get; set; }
+        public string _Prenom { get; set; }
 
         public List<Chantier> _Chantiers { get; set; }
         public Compagnon()

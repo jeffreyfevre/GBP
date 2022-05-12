@@ -27,8 +27,10 @@ namespace WpfApp1.modeles
         public string _Adresse { get; set; }
         public string _NomChantier { get; set; }
         public string _Commentaire { get; set; }
+        public string _telephone { get; set; }
         public List<Devis> _devis { get; set; }
         public List<Facture> _factures { get; set; }
+        public List<Compagnon> _compagnon { get; set; }
         public string jToString()
         {
             return "id : " + this._Id.ToString() + ", adresse : " + this._Adresse + ", nom chantier : " + this._NomChantier + ", commentaire :" + this._Commentaire;

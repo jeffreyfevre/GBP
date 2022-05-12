@@ -23,14 +23,7 @@ namespace WpfApp1.wrappers
         }
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
         // et pareil our GetString()
-        public Devis readDevis(int id)
-        {
-            sqlite_conn.Open();
-            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "SELECT * FROM devis WHERE id_devis=" + id;
-            SqliteDataReader rdr = sqlCommand.ExecuteReader();
-            return convertDataToObject(rdr);
-        }
+
         public void updateDevis(Devis devis)
         {
             sqlite_conn.Open();
@@ -79,40 +72,5 @@ namespace WpfApp1.wrappers
             }
             return listDevis;
         }
-        public List<Devis> searchDevisMultiParam(Dictionary<string, string> dic)
-        {
-            sqlite_conn.Open();
-            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            string Query = "SELECT * FROM devis WHERE ";
-            //sqlCommand.CommandText = "SELECT * FROM chantier WHERE nom_chantier=" + name;
-            foreach (KeyValuePair<string, string> param in dic)
-            {
-                if (param.Value != "")
-                {
-                    string where = param.Key + "==\'" + param.Value + "\'";
-                    Query += where + " && ";
-                }
-            }
-            Query = Query.Substring(0, Query.Length - 3);
-            sqlCommand.CommandText = Query;
-            Console.WriteLine(Query);
-            List<Devis> listDevis = new List<Devis>();
-            SqliteDataReader reader = sqlCommand.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Devis ch = convertDataToObject(reader);
-                listDevis.Add(ch);
-            }
-            return listDevis;
-        }
-        private void logDevisfromBDD(SqliteDataReader reader)
-        {
-            while (reader.Read())
-            {
-                Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
-            }
-        }
-
     }
 }

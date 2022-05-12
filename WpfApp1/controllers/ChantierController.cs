@@ -2,6 +2,8 @@
 using System.Windows;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
+using System.Linq;
+
 
 namespace WpfApp1
 {
@@ -11,24 +13,31 @@ namespace WpfApp1
         {
 
             Dictionary<string, string> dicChantier = new Dictionary<string, string>();
-            dicChantier.Add("id_chantier", id_chantier.Text);
-            dicChantier.Add("nom_chantier", nom_chantier.Text);
-            dicChantier.Add("adresse", adresse_chantier.Text);
-            dicChantier.Add("chantier_com", chantier_com.Text);
             WrapChantier WC = new WrapChantier();
-            List<Chantier> lch = WC.searchChantierMultiParam(dicChantier);
+            List<Chantier> lch = WC.getAllChantier().Where(x => x._Id == int.Parse(id_chantier.Text) || x._NomChantier== nom_chantier.Text || x._Adresse == adresse_chantier.Text ||
+            x._telephone == telephone_chantier.Text).ToList();
             dataChantier.ItemsSource = lch;
         }
 
-        private void createChantier_Click(object sender, RoutedEventArgs e)
+
+        private void SwapChantierClick(object sender, RoutedEventArgs e)
         {
-            Dictionary<string, string> dicChantier = new Dictionary<string, string>();
-            // Chantier chant = new Chanier(0, nom_chantier_c.Text, adresse_chantier_c.Text, chantier_com_c.Text);
-            dicChantier.Add("nom_chantier", nom_chantier.Text);
-            dicChantier.Add("adresse", adresse_chantier.Text);
-            dicChantier.Add("chantier_com", chantier_com.Text);
-            WrapChantier WC = new WrapChantier();
-            //WC.createChantier(chant);
+            ChantierWindowC chantierWindow = new ChantierWindowC();
+            chantierWindow.Show();
+
+
         }
+    }
+
+        public partial class ChantierWindowC : Window
+        {
+            private void createChantier_Click(object sender, RoutedEventArgs e)
+            {
+            WrapChantier WC = new WrapChantier();
+            Dictionary<string, string> dicChantier = new Dictionary<string, string>();
+                Chantier chant = new Chantier(0,Chantier.State.Encours, nomchantier.Text, addrchantier.Text, chantiercom.Text,null,null);
+                WC.createChantier(chant);
+            this.Hide();
+            }
     }
 }

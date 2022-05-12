@@ -89,8 +89,6 @@ namespace WpfApp1.wrappers
             while (reader.Read())
             {
                 Compagnon dev = convertDataToObject(reader);
-                Console.WriteLine("coucou");
-                Console.WriteLine("compagnon :"+dev.jToString());
                 listCompagnon.Add(dev);
             }
             return listCompagnon;

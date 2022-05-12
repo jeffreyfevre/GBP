@@ -11,15 +11,17 @@ namespace WpfApp1
         {
 
             Dictionary<string, string> dicCompagnon = new Dictionary<string, string>();
-            dicCompagnon.Add("id_compagnon", id_compagnon.Text);
-            dicCompagnon.Add("name", name_create.Text);
-            dicCompagnon.Add("telephone", telephone_create.Text);
-            dicCompagnon.Add("cout_horaire", cout_horaire_create.Text);
-            dicCompagnon.Add("date_embauche", date_embauche_create.Text);
-            dicCompagnon.Add("compagnon_com", compagnon_com_create.Text);
+          
             WrapCompagnon WC = new WrapCompagnon();
             List<Compagnon> lch = WC.searchCompagnonsMultiParam(dicCompagnon);
             dataChantier.ItemsSource = lch;
+        }
+
+        private void SwapCreateCompagnon(object sender, RoutedEventArgs e)
+        {
+            CompagnonWindowC compagnonWindowC = new CompagnonWindowC();
+            compagnonWindowC.Show();
+
         }
         private void createCompagnons_Click(object sender, RoutedEventArgs e)
         {
@@ -27,5 +29,15 @@ namespace WpfApp1
             WrapCompagnon WC = new WrapCompagnon();
             //WC.createCompagnon(chant);
         }
+
+
     }
+        public partial class CompagnonWindowC : Window
+        {
+            private void createCompagnon_Click(object sender, RoutedEventArgs e)
+            {
+                this.Hide();
+            }
+
+        }
 }

@@ -2,6 +2,7 @@
 using System.Windows;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
+using System.Linq;
 
 namespace WpfApp1
 {
@@ -11,13 +12,9 @@ namespace WpfApp1
         {
 
             Dictionary<string, string> dicChantier = new Dictionary<string, string>();
-            dicChantier.Add("id_chantier", id_chantier.Text);
-            dicChantier.Add("nom_chantier", nom_chantier.Text);
-            dicChantier.Add("adresse", adresse_chantier.Text);
-            dicChantier.Add("chantier_com", chantier_com.Text);
             WrapDevis WC = new WrapDevis();
-            List<Devis> lch = WC.searchDevisMultiParam(dicChantier);
-            dataChantier.ItemsSource = lch;
+            //List<Devis> lch = WC.getAllDevis().Where(x => x._Id== int.Parse(id_devis.Text)&& tempsprevuDevis.Text==x._TempsPrevu && coutPrevuDevis.Text == x._CoutPrevu ).ToList();
+           // dataChantier.ItemsSource = lch;
         }
 
     }
