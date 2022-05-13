@@ -19,7 +19,7 @@ namespace WpfApp1.wrappers
         {
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "INSERT INTO compagnon VALUES ('" + compagnon._Id + "','" + compagnon._Name + "','" + compagnon._Telephone + "','" + compagnon._CoutHoraire + "','" + compagnon._DateEmbauche.ToString() + "','" + compagnon._Commentaire+"')";
+            sqlCommand.CommandText = "INSERT INTO compagnon (Nom,telephone,cout_horaire,date_time,compagnon_com,Prenom) VALUES ('"+ compagnon._Name + "','" + compagnon._Telephone + "','" + compagnon._CoutHoraire + "','" + compagnon._DateEmbauche.ToString() + "','" + compagnon._Commentaire + "','" + compagnon._Prenom + "')";
             Console.WriteLine(sqlCommand.CommandText);
             SqliteDataReader rdr = sqlCommand.ExecuteReader();
             for (int i = 0; i < compagnon._Chantiers.Count; i++)
@@ -29,7 +29,7 @@ namespace WpfApp1.wrappers
                     {"@id_chantier", compagnon._Id},
                     {"@id_facture", compagnon._Chantiers[i]},
                 };
-                sqlCommand.CommandText = "INSERT INTO chantier_xchantier  (id_compagnon,id_chantier) VALUES ('" + compagnon._Chantiers[i] + "','" + compagnon._Id + "')";
+                sqlCommand.CommandText = "INSERT INTO CompagnonsChantier  (id_compagnon,id_chantier) VALUES ('" + compagnon._Chantiers[i] + "','" + compagnon._Id + "')";
                 sqlCommand.ExecuteNonQuery();
             }
         }
@@ -126,7 +126,7 @@ namespace WpfApp1.wrappers
             Compagnon compagnon = new Compagnon();
             compagnon._Id = reader.GetInt32(0);
             compagnon._Name = reader.GetString(1);
-            compagnon._Telephone = reader.GetInt32(2);
+            compagnon._Telephone = reader.GetString(2);
             compagnon._CoutHoraire = reader.GetInt32(3);
             compagnon._DateEmbauche = reader.GetString(4);
             compagnon._Commentaire = reader.GetString(5);
@@ -139,7 +139,7 @@ namespace WpfApp1.wrappers
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             List<int> listId = new List<int>();
-            sqlCommand.CommandText = "SELECT * FROM compagnon_xchantier WHERE id_compagnon=" + id;
+            sqlCommand.CommandText = "SELECT * FROM CompagnonsChantier WHERE Id=" + id;
             SqliteDataReader reader = sqlCommand.ExecuteReader();
 
             while (reader.Read())

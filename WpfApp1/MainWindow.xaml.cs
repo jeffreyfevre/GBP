@@ -31,35 +31,52 @@ namespace WpfApp1
         List<Facture> factures = new List<Facture>();
         List<Devis> devis = new List<Devis>();
         List<Compagnon> compagnons = new List<Compagnon>();
+        CompagnonWindowC compagnonWindowC = new CompagnonWindowC();
+        ChantierWindowC chantierWindowC = new ChantierWindowC();
         public MainWindow()
         {
+
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
+            this.WindowStyle = WindowStyle.None;
+            init();
+            compagnonWindowC.MessageUpdate += OnLoaded;
+            chantierWindowC.MessageUpdate += OnLoaded;
+        }
+
+        private void OnLoaded()
+        {
+            init();
+        }
+        public void init()
+        {
             manageBDD bddManager = new manageBDD();
             bddManager.test();
+
             WrapChantier WC = new WrapChantier();
-            chants = WC.getAllChantier();
-            //people = GetPeople();
+            chants = WC.getAllChantier();         
+            dataChantier.ItemsSource = chants;
+
             WrapFacture WCF = new WrapFacture();
             factures = WCF.getAllFacture();
-            dataChantier.ItemsSource = chants;
             datafacture.ItemsSource = factures;
-            WrapDevis WDD  = new WrapDevis();
+
+            WrapDevis WDD = new WrapDevis();
             devis = WDD.getAllDevis();
             datadevis.ItemsSource = devis;
+
             WrapCompagnon wrapCompagnon = new WrapCompagnon();
             compagnons = wrapCompagnon.getAllCompagnon();
             dataCompagnon.ItemsSource = compagnons;
-            
-
         }
 
         private List<person> GetPeople()
         {
-            
+
             List<person> people = new List<person>();
-            people.Add(new person() { PersonId=1 ,Name="jeffrey",Surname="fevre",Profession="dev" });
-            people.Add(new person() { PersonId=2 ,Name="flo",Surname="chav",Profession="dev" });
-            people.Add(new person() { PersonId=3 ,Name="arnal",Surname="florez",Profession="dev" });
+            people.Add(new person() { PersonId = 1, Name = "jeffrey", Surname = "fevre", Profession = "dev" });
+            people.Add(new person() { PersonId = 2, Name = "flo", Surname = "chav", Profession = "dev" });
+            people.Add(new person() { PersonId = 3, Name = "arnal", Surname = "florez", Profession = "dev" });
             return people;
         }
 
@@ -75,7 +92,7 @@ namespace WpfApp1
 
         private void datagridjeff_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -94,5 +111,10 @@ namespace WpfApp1
         }
 
 
+    }
+
+    public class MessageEventArgs : EventArgs
+    {
+        public string Message { get; set; }
     }
 }

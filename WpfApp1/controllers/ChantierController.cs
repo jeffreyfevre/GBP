@@ -22,8 +22,7 @@ namespace WpfApp1
 
         private void SwapChantierClick(object sender, RoutedEventArgs e)
         {
-            ChantierWindowC chantierWindow = new ChantierWindowC();
-            chantierWindow.Show();
+            chantierWindowC.Show();
 
 
         }
@@ -31,13 +30,16 @@ namespace WpfApp1
 
         public partial class ChantierWindowC : Window
         {
-            private void createChantier_Click(object sender, RoutedEventArgs e)
-            {
-            WrapChantier WC = new WrapChantier();
-            Dictionary<string, string> dicChantier = new Dictionary<string, string>();
+                public delegate void ChatMsgDelegate();
+                public event ChatMsgDelegate MessageUpdate;
+                private void createChantier_Click(object sender, RoutedEventArgs e)
+                {
+
+                WrapChantier WC = new WrapChantier();
                 Chantier chant = new Chantier(0,Chantier.State.Encours, nomchantier.Text, addrchantier.Text, chantiercom.Text,null,null);
                 WC.createChantier(chant);
-            this.Hide();
-            }
-    }
+                 MessageUpdate();
+                this.Hide();
+                }
+        }
 }
