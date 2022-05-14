@@ -33,7 +33,7 @@
                             </TextBlock.Text>
                         </TextBlock>
                     </Button>
-                    <Button Name="MainAddCompagnonButton" Grid.Column="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
+                    <Button Name="MainAddCompagnonButton" Grid.Column="1" Height="Auto" Margin="10,10,10,10" Background="LightGray" Click="MainAddCompagnonButton_Click">
                         <TextBlock>
                             <TextBlock.Text>
                                 Ajouter un compagnon

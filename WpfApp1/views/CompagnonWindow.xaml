@@ -32,62 +32,75 @@
         </Grid>
 
         <!--CONTENT-->
-        <Grid Grid.Row="2">
-            <StackPanel Grid.Row="0">
-                <TextBox Name="NameBox"
+        <ScrollViewer Grid.Row="2">
+            <Grid x:Name="ContentGrid">
+                <StackPanel Grid.Row="0" Margin="8">
+                    <TextBox Name="NameBox" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          materialDesign:HintAssist.Hint="Nom"
                          Text="{Binding Content}"
-                         Margin="8 0 0 0"
                          VerticalAlignment="Bottom" />
-                <TextBox Name ="SurnameBox"
+                    <TextBox Name ="SurnameBox" Margin="8"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          materialDesign:HintAssist.Hint="Prenom"
                          Text="{Binding Content}"
-                         Margin="8 0 0 0"
                          VerticalAlignment="Bottom" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="9*"/>
-                    </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon  Kind="Phone" Grid.Column="0" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Name="PhoneBox"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numéro tel" Text="{Binding Content}" Margin="8 0 0 0" Grid.Column="1" MaxLength="10"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="9*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon  Kind="Phone" Grid.Column="0" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox Name="PhoneBox" 
+                             Margin="8"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numéro tel" Text="{Binding Content}" Grid.Column="1" MaxLength="10"
                              materialDesign:TransitionAssist.DisableTransitions="True"
-                             materialDesign:TextFieldAssist.HasClearButton="True"/>
-                </Grid>
-                <TextBox Name="TarifHorraireBox"  Margin="10,0,0,0" VerticalAlignment="Center" AcceptsReturn="False"  
+                             materialDesign:TextFieldAssist.HasClearButton="True"
+                             PreviewTextInput="TelNumberTextInput"/>
+                    </Grid>
+                    <TextBox Name="TarifHorraireBox" Margin="8"
+                         VerticalAlignment="Center" AcceptsReturn="False"  
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          TextWrapping="NoWrap"
                          materialDesign:HintAssist.Hint="Prix"
                          materialDesign:TextFieldAssist.SuffixText="€/H"
                          PreviewTextInput="HourRateTextInput"/>
-                <DatePicker Name="StartDate" Margin="0,0,0,0" materialDesign:HintAssist.Hint="Date Embauche" Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                <Label Name="LabelChantier" Content="Chantiers" Foreground="Gray"/>
-                <DataGrid x:Name="ChantiersDataGrid" 
-                          Margin="8,0,0,0"
+                    <DatePicker Name="StartDate" Margin="8"
+                            materialDesign:HintAssist.Hint="Date Embauche" 
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                    <Label Name="LabelChantier" Margin="8"
+                       Content="Chantiers" Foreground="Gray"/>
+                    <DataGrid x:Name="ChantiersDataGrid" Margin="8"
                           Style="{StaticResource MaterialDesignDataGrid}"
                           materialDesign:HintAssist.Hint="Chantiers"/>
-                <Label Name="LabelFacture" Content="Factures" Foreground="Gray"/>
-                <DataGrid x:Name="FacturesDataGrid" 
-                          Margin="8,0,0,0"
+                    <Label Name="LabelFacture" Margin="8"
+                       Content="Factures" 
+                       Foreground="Gray"/>
+                    <DataGrid x:Name="FacturesDataGrid" Margin="8"
                           Style="{StaticResource MaterialDesignDataGrid}"
                           materialDesign:HintAssist.Hint="Chantiers"/>
-                <TextBox x:Name="CommentBox" 
-                         Height="100" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Commentaire"
-                         Text="{Binding Content}" Margin="8 0 0 0"/>
-            </StackPanel>
-        </Grid>
+
+                    <TextBox Name="CommantaryBox" Margin="8"
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Stretch"
+                        AcceptsReturn="True"
+                        VerticalScrollBarVisibility="Auto"
+                        SpellCheck.IsEnabled="True"
+                        materialDesign:HintAssist.Hint="Commentaire"
+                        MaxHeight="100"
+                        Height="Auto"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
         <Grid Grid.Row="3" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ValidButton" Margin="8,0,0,0" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Check}" Background="Green"/>
-            <Button x:Name="CancelButton" Margin="8,0,0,0" Grid.Column="0" Content="{materialDesign:PackIcon Kind=CloseOctagon}" Background="Red"/>
+            <Button x:Name="CancelButton" Margin="8" Grid.Column="0" Content="{materialDesign:PackIcon Kind=CloseOctagon}" Background="IndianRed"/>
+            <Button x:Name="ValidButton" Margin="8" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Check}" Background="LightGreen"/>
+            <Button x:Name="EditButton" Margin="8" Grid.Column="1" Content="{materialDesign:PackIcon Kind=Edit}" Background="AliceBlue" Click="EditButton_Click"/>
         </Grid>
     </Grid>
 </Window>

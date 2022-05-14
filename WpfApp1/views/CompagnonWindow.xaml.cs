@@ -1,17 +1,11 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using WpfApp1.modeles;
+using WpfApp1.wrappers;
 
 namespace WpfApp1.views
 {
@@ -23,8 +17,35 @@ namespace WpfApp1.views
         public CompagnonWindow()
         {
             InitializeComponent();
+            WrapChantier WC = new WrapChantier();
+            List<Chantier> chants = WC.getAllChantier();
+            ChantiersDataGrid.ItemsSource = chants;
         }
         private static readonly Regex _regex = new Regex("[0-9]");
+
+        public void SetEditMode()
+        {
+            ContentGrid.IsEnabled = true;
+            ValidButton.Visibility = Visibility.Visible;
+            CancelButton.Visibility = Visibility.Visible;
+            EditButton.Visibility = Visibility.Hidden;
+        }
+        public void SetReadMode()
+        {
+            ContentGrid.IsEnabled = false;
+            ValidButton.Visibility = Visibility.Hidden;
+            CancelButton.Visibility = Visibility.Hidden;
+            EditButton.Visibility = Visibility.Visible;
+        }
+        public void SetNewMode()
+        {
+            EditButton.Visibility = Visibility.Collapsed;
+            //List<UIElement> to_hide = new List<UIElement>() { LabelFacture, ChantiersDataGrid, FacturesDataGrid, FacturesDataGrid, EditButton };
+            //foreach(UIElement element in to_hide)
+            //{
+            //    element.Visibility = Visibility.Collapsed;
+            //}
+        }
         private static bool IsTextAllowed(string text)
         {
             bool result = _regex.IsMatch(text);
@@ -35,7 +56,6 @@ namespace WpfApp1.views
             TextBox rateInput = sender as TextBox;
             if (!IsTextAllowed(e.Text) || rateInput.Text.Length > 3)
             {
-                // event no longuer go further
                 e.Handled = true;
             }
 
@@ -45,9 +65,13 @@ namespace WpfApp1.views
             TextBox rateInput = sender as TextBox;
             if (!IsTextAllowed(e.Text) || rateInput.Text.Length > 9)
             {
-                // event no longuer go further
                 e.Handled = true;
             }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetEditMode();
         }
     }
 }
