@@ -18,7 +18,7 @@ namespace WpfApp1.views
     /// <summary>
     /// Logique d'interaction pour Page1.xaml
     /// </summary>
-    public partial class Home : Page
+    public partial class Home : Window
     {
         public Home()
         {
