@@ -24,5 +24,12 @@ namespace WpfApp1.views
         {
             InitializeComponent();
         }
+
+        private void MainAddChantierButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChantierWindow chantierWindow = new views.ChantierWindow();
+            chantierWindow.SetNewMode();
+            chantierWindow.Show();
+        }
     }
 }

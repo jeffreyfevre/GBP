@@ -26,28 +26,28 @@
                     </Grid.RowDefinitions>
                     <RadioButton>
                     </RadioButton>
-                    <Button Grid.Column="0" Height="Auto" Margin="10,10,10,10" Background="LightGray">
+                    <Button Name="MainAddChantierButton" Grid.Column="0" Height="Auto" Margin="10,10,10,10" Background="LightGray" Click="MainAddChantierButton_Click">
                         <TextBlock>
                             <TextBlock.Text>
                                 Ajouter un chantier
                             </TextBlock.Text>
                         </TextBlock>
                     </Button>
-                    <Button Grid.Column="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
+                    <Button Name="MainAddCompagnonButton" Grid.Column="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
                         <TextBlock>
                             <TextBlock.Text>
                                 Ajouter un compagnon
                             </TextBlock.Text>
                         </TextBlock>
                     </Button>
-                    <Button Grid.Column="0" Grid.Row="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
+                    <Button Name="MainAddDevisButton" Grid.Column="0" Grid.Row="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
                         <TextBlock>
                             <TextBlock.Text>
                                 Ajouter un devis
                             </TextBlock.Text>
                         </TextBlock>
                     </Button>
-                    <Button Grid.Column="1" Grid.Row="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
+                    <Button Name="MainAddFactureButton" Grid.Column="1" Grid.Row="1" Height="Auto" Margin="10,10,10,10" Background="LightGray">
                         <TextBlock>
                             <TextBlock.Text>
                                 Ajouter une Facture

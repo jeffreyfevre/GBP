@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 
-namespace WpfApp1
+namespace WpfApp1.views
 {
     /// <summary>
     /// Logique d'interaction pour ChantierWindow.xaml
@@ -23,6 +23,24 @@ namespace WpfApp1
         public ChantierWindow()
         {
             InitializeComponent();
+        }
+        public void SetEditMode()
+        {
+        }
+        public void SetReadMode()
+        {
+        }
+        public void SetNewMode()
+        {
+            UIElement l_facture = this.FindName( "LabelFacture" ) as UIElement;
+            UIElement d_facture = this.FindName( "FacturesDataGrid" ) as UIElement;
+            UIElement l_devis = this.FindName( "LabelDevis" ) as UIElement;
+            UIElement d_devis = this.FindName( "DevisDataGrid" ) as UIElement;
+            List<UIElement> to_hide = new List<UIElement>() {l_facture, l_devis, d_facture, d_devis };
+            foreach (UIElement element in to_hide)
+            {
+                element.Visibility = Visibility.Hidden;
+            }
         }
         private static readonly Regex _regex = new Regex("[0-9]");
         private static bool IsTextAllowed(string text)
@@ -38,7 +56,6 @@ namespace WpfApp1
                 // event no longuer go further
                 e.Handled = true;
             }
-
         }
         private void TelNumberTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -48,11 +65,6 @@ namespace WpfApp1
                 // event no longuer go further
                 e.Handled = true;
             }
-        }
-
-        private void ChangePage(object sender, MouseButtonEventArgs e)
-        {
-            this.Content = new views.Home();
         }
     }
 }

@@ -130,7 +130,7 @@
     <Compile Include="ChantierWindowC.xaml.cs">
       <DependentUpon>ChantierWindowC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChantierWindow.xaml.cs">
+    <Compile Include="views\ChantierWindow.xaml.cs">
       <DependentUpon>ChantierWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompagnonWindowC.xaml.cs">
@@ -140,7 +140,7 @@
     <Compile Include="controllers\FacturesController.cs" />
     <Compile Include="controllers\DevisController.cs" />
     <Compile Include="controllers\ChantierController.cs" />
-    <Compile Include="CompagnonWindow.xaml.cs">
+    <Compile Include="views\CompagnonWindow.xaml.cs">
       <DependentUpon>CompagnonWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="modeles\DisplayAttribute.cs" />
@@ -157,7 +157,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ChantierWindow.xaml">
+    <Page Include="views\ChantierWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -165,7 +165,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CompagnonWindow.xaml">
+    <Page Include="views\CompagnonWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -232,10 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bdd\" />
-    <Folder Include="views\chantiers\" />
-    <Folder Include="views\compagnons\" />
-    <Folder Include="views\factures\" />
-    <Folder Include="views\xdevis\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\flo.jpg" />

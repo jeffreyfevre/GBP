@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 
-namespace WpfApp1
+namespace WpfApp1.views
 {
     /// <summary>
     /// Logique d'interaction pour BuildWindow.xaml

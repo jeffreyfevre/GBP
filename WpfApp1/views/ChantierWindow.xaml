@@ -1,0 +1,82 @@
+﻿<Window x:Class="WpfApp1.views.ChantierWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.views"
+        mc:Ignorable="d"
+        Title="ChantierdWindow" Height="800" Width="450">
+
+    <!--MAIN LAYOUT-->
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!--PHOTO HEADER-->
+        <Grid Grid.Row="0" Name="header">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="1" Source="/resources/chantier.png" RenderOptions.BitmapScalingMode="Fant">
+            </Image>
+        </Grid>
+        <!--CONTENT-->
+        <Grid Grid.Row="2">
+            <StackPanel Grid.Row="0">
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nom chantier" Text="{Binding Content}" Margin="8 0 0 0" VerticalAlignment="Bottom" />
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adresse du chantier" Text="{Binding Content}" Margin="8 0 0 0"/>
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Code postal" Text="{Binding Content}" Margin="8 0 0 0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="9*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon  Kind="Phone" Grid.Column="0" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Name="PhoneBox"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Numéro tel"
+                             Text="{Binding Content}"
+                             Margin="8 0 0 0"
+                             Grid.Column="1"
+                             MaxLength="10"
+                             materialDesign:TransitionAssist.DisableTransitions="True"
+                             materialDesign:TextFieldAssist.HasClearButton="True"/>
+                </Grid>
+                <DatePicker Name="StartDate" Margin="0,0,0,0" materialDesign:HintAssist.Hint="Date Debut" Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                <DatePicker Name="DateEnd" Margin="0,0,0,0" materialDesign:HintAssist.Hint="Date Fin"  Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <Label Name="LabelDevis" Content="Devis" Foreground="Gray"/>
+                <DataGrid x:Name="DevisDataGrid" 
+                          Margin="8,0,0,0"
+                          Style="{StaticResource MaterialDesignDataGrid}"
+                          materialDesign:HintAssist.Hint="Chantiers"/>
+                <Label Name="LabelFacture" Content="Factures" Foreground="Gray"/>
+                <DataGrid x:Name="FacturesDataGrid" 
+                          Margin="8,0,0,0"
+                          Style="{StaticResource MaterialDesignDataGrid}"
+                          materialDesign:HintAssist.Hint="Chantiers"/>
+                <TextBox x:Name="CommentBox" Height="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Commentaire" Text="{Binding Content}" Margin="8 0 0 0"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ValidButton" Margin="8,0,0,0" Grid.Column="0" Content="{materialDesign:PackIcon Kind=CloseOctagon}" Background="Red"/>
+            <Button x:Name="CancelButton" Margin="8,0,0,0" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Check}" Background="Green"/>
+        </Grid>
+    </Grid>
+</Window>
+
+    
