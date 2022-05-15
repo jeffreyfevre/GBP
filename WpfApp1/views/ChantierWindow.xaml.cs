@@ -13,7 +13,9 @@ namespace WpfApp1.views
     /// </summary>
     public partial class ChantierWindow : Window
     {
-
+        public delegate void ViewUpdateEvent();
+        public event ViewUpdateEvent UpdateHandler;
+        private WrapChantier chantierController = new WrapChantier();
         public ChantierWindow()
         {
             InitializeComponent();
@@ -35,11 +37,6 @@ namespace WpfApp1.views
         public void SetNewMode()
         {
             EditButton.Visibility = Visibility.Collapsed;
-            //List<UIElement> to_hide = new List<UIElement>() {LabelFacture, LabelDevis, FacturesDataGrid, DevisDataGrid, EditButton };
-            //foreach (UIElement element in to_hide)
-            //{
-            //    element.Visibility = Visibility.Collapsed;
-            //}
         }
         private static readonly Regex _regex = new Regex("[0-9]");
         private static bool IsTextAllowed(string text)
@@ -64,12 +61,22 @@ namespace WpfApp1.views
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            SetReadMode();
+            this.Close();
         }
 
         private void ValidButton_Click(object sender, RoutedEventArgs e)
         {
-            SetReadMode();
+            Chantier nChantier = new Chantier(0,
+                Chantier.State.Inconnue,
+                AdressBox.Text,
+                NameBox.Text,
+                CommantaryBox.Text,
+                new List<Devis>(),
+                new List<modèles.Facture>()
+                );
+            chantierController.createChantier( nChantier );
+            UpdateHandler();
+            this.Close();
         }
     }
 }

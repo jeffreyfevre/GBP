@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Text.RegularExpressions;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
+using WpfApp1.modèles;
 
 namespace WpfApp1.views
 {
@@ -14,12 +15,16 @@ namespace WpfApp1.views
     /// </summary>
     public partial class CompagnonWindow : Window
     {
+        public delegate void ViewUpdateEvent();
+        public event ViewUpdateEvent UpdateHandler;
+        private WrapCompagnon compagnonController = new WrapCompagnon();
+        private WrapChantier chantierController = new WrapChantier();
+
         public CompagnonWindow()
         {
             InitializeComponent();
-            WrapChantier WC = new WrapChantier();
-            List<Chantier> chants = WC.getAllChantier();
-            ChantiersDataGrid.ItemsSource = chants;
+            List<Chantier> chantiers = chantierController.getAllChantier();
+            ChantiersDataGrid.ItemsSource = chantiers;
         }
         private static readonly Regex _regex = new Regex("[0-9]");
 
@@ -40,11 +45,6 @@ namespace WpfApp1.views
         public void SetNewMode()
         {
             EditButton.Visibility = Visibility.Collapsed;
-            //List<UIElement> to_hide = new List<UIElement>() { LabelFacture, ChantiersDataGrid, FacturesDataGrid, FacturesDataGrid, EditButton };
-            //foreach(UIElement element in to_hide)
-            //{
-            //    element.Visibility = Visibility.Collapsed;
-            //}
         }
         private static bool IsTextAllowed(string text)
         {
@@ -72,6 +72,27 @@ namespace WpfApp1.views
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             SetEditMode();
+        }
+
+        private void ValidButton_Click(object sender, RoutedEventArgs e)
+        {
+            int tarif = 0;
+            if (int.TryParse( TarifHorraireBox.Text, out tarif ))
+            {
+                Compagnon nCompagnon = new Compagnon(
+                    0,
+                    NameBox.Text,
+                    PhoneBox.Text,
+                    tarif,
+                    StartDate.Text,
+                    CommantaryBox.Text,
+                    SurnameBox.Text,
+                    new List<Chantier>()
+                    );
+                compagnonController.createCompagnon(nCompagnon);
+            }
+            UpdateHandler();
+            this.Close();
         }
     }
 }
