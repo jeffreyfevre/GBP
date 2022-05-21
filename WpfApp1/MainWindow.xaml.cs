@@ -37,7 +37,7 @@ namespace WpfApp1
         {
 
             InitializeComponent();
-            this.WindowState = WindowState.Maximized;
+            //this.WindowState = WindowState.Maximized;
             this.WindowStyle = WindowStyle.None;
             init();
             compagnonWindowC.MessageUpdate += OnLoaded;

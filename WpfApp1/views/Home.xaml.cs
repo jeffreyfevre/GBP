@@ -2,7 +2,7 @@
 using System.Windows;
 using WpfApp1.modeles;
 // j'ai faillit gerber mais c'est là
-using WpfApp1.modèles;
+
 using WpfApp1.wrappers;
 using WpfApp1.wrapper;
 
@@ -27,8 +27,8 @@ namespace WpfApp1.views
         }
         public void init()
         {
-            manageBDD bddManager = new manageBDD();
-            bddManager.test();
+            ManageBDD bddManager = new ManageBDD();
+            bddManager.initBDD();
 
             //Fill chantier data grid
             WrapChantier WC = new WrapChantier();

@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Text.RegularExpressions;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
-using WpfApp1.modèles;
+
 
 namespace WpfApp1.views
 {
@@ -79,17 +79,17 @@ namespace WpfApp1.views
             int tarif = 0;
             if (int.TryParse( TarifHorraireBox.Text, out tarif ))
             {
-                Compagnon nCompagnon = new Compagnon(
-                    0,
-                    NameBox.Text,
-                    PhoneBox.Text,
-                    tarif,
-                    StartDate.Text,
-                    CommantaryBox.Text,
-                    SurnameBox.Text,
-                    new List<Chantier>()
-                    );
-                compagnonController.createCompagnon(nCompagnon);
+                //Compagnon nCompagnon = new Compagnon(
+                //    0,
+                //    NameBox.Text,
+                //    PhoneBox.Text,
+                //    tarif,
+                //    StartDate.Text,
+                //    CommantaryBox.Text,
+                //    SurnameBox.Text,
+                //    new List<Chantier>()
+                //    );
+                //compagnonController.createCompagnon(nCompagnon);
             }
             UpdateHandler();
             this.Close();
