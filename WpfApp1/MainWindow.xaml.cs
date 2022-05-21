@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.modeles;
-using WpfApp1.modèles;
+
 using WpfApp1.tests;
 using WpfApp1.wrappers;
 using WpfApp1.wrapper;
@@ -50,20 +50,20 @@ namespace WpfApp1
         }
         public void init()
         {
-            manageBDD bddManager = new manageBDD();
-            bddManager.test();
+            ManageBDD bddManager = new ManageBDD();
+            bddManager.initBDD();
 
             WrapChantier WC = new WrapChantier();
             chants = WC.getAllChantier();         
             dataChantier.ItemsSource = chants;
 
-            WrapFacture WCF = new WrapFacture();
-            factures = WCF.getAllFacture();
-            datafacture.ItemsSource = factures;
+            //WrapFacture WCF = new WrapFacture();
+            //factures = WCF.getAllFacture();
+            //datafacture.ItemsSource = factures;
 
-            WrapDevis WDD = new WrapDevis();
-            devis = WDD.getAllDevis();
-            datadevis.ItemsSource = devis;
+            //WrapDevis WDD = new WrapDevis();
+            //devis = WDD.getAllDevis();
+            //datadevis.ItemsSource = devis;
 
             WrapCompagnon wrapCompagnon = new WrapCompagnon();
             compagnons = wrapCompagnon.getAllCompagnon();

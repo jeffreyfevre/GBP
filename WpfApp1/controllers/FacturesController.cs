@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using WpfApp1.modèles;
+using WpfApp1.modeles;
 using WpfApp1.wrappers;
 
 namespace WpfApp1

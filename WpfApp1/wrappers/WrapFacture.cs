@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.modèles;
+using WpfApp1.modeles;
 
 namespace WpfApp1.wrappers
 {

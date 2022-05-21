@@ -1,4 +1,4 @@
-﻿namespace WpfApp1.modèles
+﻿namespace WpfApp1.modeles
 {
     class Facture
     {

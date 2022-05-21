@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using WpfApp1.modèles;
+using WpfApp1.modeles;
 using WpfApp1.wrappers;
 
 namespace WpfApp1
@@ -43,8 +43,8 @@ namespace WpfApp1
             {
 
                 WrapCompagnon WC = new WrapCompagnon();
-                Compagnon compagnon = new Compagnon(0,nom.Text,telephone.Text, int.Parse(tarif.Text), dateembauche.Text,commentaire.Text,prenom.Text,new List<modeles.Chantier>()) ;
-                WC.createCompagnon(compagnon);
+                //Compagnon compagnon = new Compagnon(0,nom.Text,telephone.Text, int.Parse(tarif.Text), dateembauche.Text,commentaire.Text,prenom.Text,new List<modeles.Chantier>()) ;
+                //WC.createCompagnon(compagnon);
                 MessageUpdate();
                 this.Hide();
             }

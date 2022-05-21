@@ -15,7 +15,7 @@ namespace WpfApp1
             Dictionary<string, string> dicChantier = new Dictionary<string, string>();
             WrapChantier WC = new WrapChantier();
             List<Chantier> lch = WC.getAllChantier().Where(x => x._Id == int.Parse(id_chantier.Text) || x._NomChantier== nom_chantier.Text || x._Adresse == adresse_chantier.Text ||
-            x._telephone == telephone_chantier.Text).ToList();
+            x._Telephone == telephone_chantier.Text).ToList();
             dataChantier.ItemsSource = lch;
         }
 
@@ -36,8 +36,8 @@ namespace WpfApp1
                 {
 
                 WrapChantier WC = new WrapChantier();
-                Chantier chant = new Chantier(0,Chantier.State.Encours, nomchantier.Text, addrchantier.Text, chantiercom.Text,null,null);
-                WC.createChantier(chant);
+                //Chantier chant = new Chantier(0,Chantier.State.Encours, nomchantier.Text, addrchantier.Text, chantiercom.Text,null,null);
+                //WC.createChantier(chant);
                  MessageUpdate();
                 this.Hide();
                 }

@@ -60,6 +60,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Json.Net, Version=1.0.33.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Json.Net.1.0.33\lib\netstandard2.0\Json.Net.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.6.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.6\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -68,6 +71,9 @@
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite, Version=6.0.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Sqlite.Core.6.0.4\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp, Version=6.6.6.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <HintPath>..\packages\PostSharp.Redist.6.6.6\lib\net45\PostSharp.dll</HintPath>
@@ -143,13 +149,24 @@
     <Compile Include="CompagnonWindow.xaml.cs">
       <DependentUpon>CompagnonWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="modeles\DisplayAttribute.cs" />
+    <Compile Include="listModeles\ListChantier.cs" />
+    <Compile Include="listModeles\ListCompagnon.cs" />
+    <Compile Include="listModeles\ListFournisseur.cs" />
+    <Compile Include="listModeles\ListMateriaux.cs" />
+    <Compile Include="listModeles\ListTraceComptable.cs" />
+    <Compile Include="modeles\Fournisseur.cs" />
+    <Compile Include="modeles\Materiaux.cs" />
+    <Compile Include="modeles\TraceComptable.cs" />
     <Compile Include="tests\person.cs" />
+    <Compile Include="utils\utils.cs" />
     <Compile Include="views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="wrappers\WrapFournisseur.cs" />
+    <Compile Include="wrappers\WrapMateriaux.cs" />
+    <Compile Include="wrappers\WrapTraceComptable.cs" />
     <Compile Include="wrappers\WrapChantier.cs" />
-    <Compile Include="wrappers\manageBDD.cs" />
+    <Compile Include="wrappers\ManageBDD.cs" />
     <Compile Include="wrappers\WrapCompagnon.cs" />
     <Compile Include="wrappers\WrapDevis.cs" />
     <Compile Include="wrappers\WrapFacture.cs" />

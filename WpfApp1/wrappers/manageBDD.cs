@@ -13,15 +13,51 @@ using System.Text;
 
 namespace WpfApp1.wrapper
 {
-    public class manageBDD
+    public class ManageBDD
     {
 
-        public manageBDD()
+        public ManageBDD()
         {
 
         }
+        public void initBDD()
+        {
+            initFolderBDD();
+            SqliteConnection sqlite_conn = new SqliteConnection(@"Data Source=C:\ProgramData\GBD\GBP_BDD.db");
+            sqlite_conn.Open();
+            var sqlCommand = sqlite_conn.CreateCommand(); 
+            //chantier
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS chantier ( id_chantier   INTEGER NOT NULL, adresse   VARCHAR(50), nom_chantier  VARCHAR(50), chantier_com  VARCHAR(500), telephone VARCHAR(50),date_creation DATETIME, etat  INTEGER, zipcode   INTEGER, numero    INTEGER,date_fin  DATETIME,PRIMARY KEY(id_chantier AUTOINCREMENT))";
+            sqlCommand.ExecuteNonQuery();
 
-        public void test()
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS chantier_trace ( id INTEGER NOT NULL, id_chantier INTEGER NOT NULL, id_trace INTEGER NOT NULL, PRIMARY KEY(id AUTOINCREMENT) );";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS compagnon ( id_compagnon INTEGER NOT NULL, nom VARCHAR(20), telephone VARCHAR(12), cout_horaire NUMERIC, date_embauche DATETIME, compagnon_com VARCHAR(50), prenom VARCHAR(20), PRIMARY KEY(id_compagnon AUTOINCREMENT) )";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS compagnons_chantier ( id INTEGER NOT NULL, id_compagnon INTEGER NOT NULL, id_chantier INTEGER NOT NULL, date_debut DATETIME, date_fin DATETIME, PRIMARY KEY(id AUTOINCREMENT) )";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS devis_compagnons ( id INTEGER NOT NULL, id_compagnon INTEGER NOT NULL, id_trace INTEGER NOT NULL, prix INTEGER, PRIMARY KEY(id AUTOINCREMENT) )";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS devis_materiaux(id INTEGER NOT NULL, id_materiaux INTEGER NOT NULL, id_trace INTEGER NOT NULL, prix INTEGER, quantite INTEGER, PRIMARY KEY(id AUTOINCREMENT))";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS fournisseur ( id INTEGER NOT NULL, nom VARCHAR(50), commentaire VARCHAR(500), telephone VARCHAR(12), adresse VARCHAR(50), zipcode TEXT, PRIMARY KEY(id AUTOINCREMENT) )";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS materiaux ( id INTEGER NOT NULL, nom VARCHAR(50), fournisseur_id INTEGER, prix INTEGER, description VARCHAR(50), PRIMARY KEY(id AUTOINCREMENT) )";
+            sqlCommand.ExecuteNonQuery();
+
+            sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS trace_comptable ( id INTEGER NOT NULL, prix NUMERIC, date_creation DATETIME, type INTEGER, commentaire TEXT, temps NUMERIC, PRIMARY KEY(id AUTOINCREMENT) )";
+            sqlCommand.ExecuteNonQuery();
+            
+  
+
+        }
+        public void initFolderBDD()
         {
             // Specify the directory you want to manipulate.
             string path = @"C:\ProgramData\GBD";
@@ -48,24 +84,7 @@ namespace WpfApp1.wrapper
                 Console.WriteLine( "The process failed: {0}", e.ToString() );
             }
 
-            SqliteConnection sqlite_conn = new SqliteConnection(@"Data Source=C:\ProgramData\GBD\GBP_BDD.db");
-            sqlite_conn.Open();
-            var sqlCommand = sqlite_conn.CreateCommand();
-            //sqlCommand.CommandText = "CREATE TABLE chantier ( id_chantier INTEGER NOT NULL, adresse TEXT, nom_chantier TEXT, chantier_com TEXT, PRIMARY KEY(id_chantier AUTOINCREMENT) )";
-            //sqlCommand.CommandText = "CREATE TABLE compagnon ( id_conpagnon INTEGER NOT NULL, name TEXT, telephone INTEGER, cout_horaire NUMERIC, date_time TEXT, compagnon_com TEXT, PRIMARY KEY(id_conpagnon AUTOINCREMENT) )";
-            //sqlCommand.CommandText = "CREATE TABLE devis ( id_devis INTEGER NOT NULL, temps_prevu TEXT, cout_prevu NUMERIC, devis_com TEXT, PRIMARY KEY(id_devis AUTOINCREMENT) )";
-            //sqlCommand.CommandText = "CREATE TABLE facture ( id_facture INTEGER NOT NULL, temps_effectif TEXT, cout_effectif NUMERIC, facture_com TEXT, PRIMARY KEY(id_facture AUTOINCREMENT) )";
-            //sqlCommand.CommandText = "select * from chantier";
-            //sqlCommand.CommandText = "DROP TABLE compagnon";
-            //sqlCommand.CommandText = "INSERT INTO chantier VALUES ('0','9 rue julien chavoutier', 'maison36', 'il existe pas');";
-
-            var rdr = sqlCommand.ExecuteReader();
-            
-            while (rdr.Read())
-            {
-                Console.WriteLine($@"{rdr.GetInt32(0)} {rdr.GetString(1)} {rdr.GetString(2)} {rdr.GetString(3)}");
-                
-            }
+           
         }
 
 
