@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WpfApp1.modeles;
 using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace WpfApp1.modeles
 {
@@ -22,7 +23,6 @@ namespace WpfApp1.modeles
         public List<TraceComptable> _Devis{ get; set; }
 
         
-
         public Compagnon(int id, string name, string telephone, int coutHoraire, DateTime dateEmbauche, string commentaire, string prenom, List<Chantier> chantiers, List<TraceComptable> factures, List<TraceComptable> devis)
         {
             _Id = id;

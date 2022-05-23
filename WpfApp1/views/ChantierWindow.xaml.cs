@@ -66,17 +66,17 @@ namespace WpfApp1.views
 
         private void ValidButton_Click(object sender, RoutedEventArgs e)
         {
-            Chantier nChantier = new Chantier(0,
-                Chantier.State.Inconnue,
-                AdressBox.Text,
-                NameBox.Text,
-                CommantaryBox.Text,
-                new List<Devis>(),
-                new List<modèles.Facture>()
-                );
-            chantierController.createChantier( nChantier );
-            UpdateHandler();
-            this.Close();
+            //Chantier nChantier = new Chantier(0,
+            //    Chantier.State.Inconnue,
+            //    AdressBox.Text,
+            //    NameBox.Text,
+            //    CommantaryBox.Text,
+            //    new List<Devis>(),
+            //    new List<modèles.Facture>()
+            //    );
+            //chantierController.createChantier( nChantier );
+            //UpdateHandler();
+            //this.Close();
         }
     }
 }
