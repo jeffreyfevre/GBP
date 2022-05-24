@@ -55,9 +55,9 @@ namespace WpfApp1.views
             WrapCompagnon wrapCompagnon = new WrapCompagnon();
             compagnons = wrapCompagnon.getAllCompagnon();
             CompagnonsDataGrid.ItemsSource = compagnons;
-            DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
-            DataGridTemplateColumn dataGridTemplateColumn = new DataGridTemplateColumn();
-            DataTemplate dataTemplate = new DataTemplate();
+            //DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
+            //DataGridTemplateColumn dataGridTemplateColumn = new DataGridTemplateColumn();
+            //DataTemplate dataTemplate = new DataTemplate();
             //System.Console.WriteLine(CompagnonsDataGrid.Items[0]);
             //foreach(System.Windows.Controls.DataGridColumn col in CompagnonsDataGrid.Columns)
             //{

@@ -92,7 +92,7 @@ namespace WpfApp1.views
                 //compagnonController.createCompagnon(nCompagnon);
             }
             UpdateHandler();
-            this.Close();
+            this.Hide();
         }
     }
 }

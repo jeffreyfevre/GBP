@@ -61,7 +61,7 @@ namespace WpfApp1.views
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
     }

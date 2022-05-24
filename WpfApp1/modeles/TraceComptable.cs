@@ -40,7 +40,7 @@ namespace WpfApp1.modeles
             // items of the enum
             Devis = 0,
             Facture = 1,    //0
-
+            Vente = 2,
         }
 
         public Types _Type { get; set; }

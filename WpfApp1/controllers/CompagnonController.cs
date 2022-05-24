@@ -6,21 +6,6 @@ using WpfApp1.wrappers;
 
 namespace WpfApp1.views
 {
-    public partial class Home : Window
-    {
-        //private void searchCompagnons_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //    Dictionary<string, string> dicCompagnon = new Dictionary<string, string>();
-
-        //    WrapCompagnon WC = new WrapCompagnon();
-        //    List<Compagnon> lch = WC.searchCompagnonsMultiParam(dicCompagnon);
-
-        //    dataChantier.ItemsSource = lch;
-        //}
-
-    }
-
     public partial class CompagnonWindow : Window
     {
         public delegate void ChatMsgDelegate();
@@ -30,8 +15,8 @@ namespace WpfApp1.views
         {
 
             WrapCompagnon WC = new WrapCompagnon();
-            //Compagnon compagnon = new Compagnon(0,nom.Text,telephone.Text, int.Parse(tarif.Text), dateembauche.Text,commentaire.Text,prenom.Text,new List<modeles.Chantier>()) ;
-            //WC.createCompagnon(compagnon);
+            Compagnon compagnon = new Compagnon(0,NameBox.Text,PhoneBox.Text, int.Parse(TarifHorraireBox.Text), StartDate.SelectedDate.Value,CommantaryBox.Text,SurnameBox.Text,new List<Chantier>(),new List<TraceComptable>(),new List<TraceComptable>()) ;
+            WC.createCompagnon(compagnon);
             MessageUpdate();
             this.Hide();
         }

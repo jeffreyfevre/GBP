@@ -104,7 +104,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="CancelButton" Margin="8" Grid.Column="0" Content="{materialDesign:PackIcon Kind=CloseOctagon}" Background="IndianRed"/>
-            <Button x:Name="ValidButton" Margin="8" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Check}" Background="LightGreen" Click="ValidButton_Click"/>
+            <Button x:Name="ValidButton" Margin="8" Grid.Column="2" Content="{materialDesign:PackIcon Kind=Check}" Background="LightGreen" Click="createCompagnon_Click"/>
             <Button x:Name="EditButton" Margin="8" Grid.Column="1" Content="{materialDesign:PackIcon Kind=Edit}" Background="AliceBlue" Click="EditButton_Click"/>
         </Grid>
     </Grid>

@@ -7,20 +7,6 @@ using System.Linq;
 
 namespace WpfApp1.views
 {
-    public partial class Home : Window
-    {
-        //private void searchChantier_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //    Dictionary<string, string> dicChantier = new Dictionary<string, string>();
-        //    WrapChantier WC = new WrapChantier();
-        //    List<Chantier> lch = WC.getAllChantier().Where(x => x._NomChantier == int.Parse(Nam.Text) || x._NomChantier == nom_chantier.Text || x._Adresse == adresse_chantier.Text ||
-        //    x._Telephone == telephone_chantier.Text).ToList();
-        //    dataChantier.ItemsSource = lch;
-        //}
-
-
-    }
     public partial class ChantierWindow : Window
     {
         public delegate void ChatMsgDelegate();
