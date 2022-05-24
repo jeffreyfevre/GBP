@@ -67,7 +67,7 @@
                          VerticalAlignment="Center" AcceptsReturn="False"  
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          TextWrapping="NoWrap"
-                         materialDesign:HintAssist.Hint="Prix"
+                         materialDesign:HintAssist.Hint="Coût Horaire"
                          materialDesign:TextFieldAssist.SuffixText="€/H"
                          PreviewTextInput="HourRateTextInput"/>
                     <DatePicker Name="StartDate" Margin="8"

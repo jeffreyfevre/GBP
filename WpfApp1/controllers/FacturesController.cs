@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
@@ -19,5 +20,12 @@ namespace WpfApp1
         //    List<Facture> lch = WC.searchFacturesMultiParam(dicChantier);
         //    dataChantier.ItemsSource = lch;
         //}
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true; // this will prevent to close
+            this.Hide(); // it'll hide the window
+                         // here now you can call any method   
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
@@ -19,6 +20,12 @@ namespace WpfApp1.views
             WC.createCompagnon(compagnon);
             MessageUpdate();
             this.Hide();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true; // this will prevent to close
+          this.Hide(); // it'll hide the window
+          // here now you can call any method   
         }
     }
 }

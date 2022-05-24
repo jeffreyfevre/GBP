@@ -3,7 +3,7 @@ using System.Windows;
 using WpfApp1.modeles;
 using WpfApp1.wrappers;
 using System.Linq;
-
+using System.ComponentModel;
 
 namespace WpfApp1.views
 {
@@ -19,6 +19,12 @@ namespace WpfApp1.views
             WC.createChantier(chant);
             MessageUpdate();
             this.Hide();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true; // this will prevent to close
+            this.Hide(); // it'll hide the window
+                         // here now you can call any method   
         }
     }
 }
