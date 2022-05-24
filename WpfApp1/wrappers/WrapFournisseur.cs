@@ -18,7 +18,7 @@ namespace WpfApp1.wrappers
 
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "INSERT INTO fournisseur (nom,commentaire,telephone,adresse,zipcode) VALUES ('" + four._Nom + "','" + four._Commentaire + "','" + four._Telephone + "','" + four._Adresse + "','" + four._Zipcode+ "')";
+            sqlCommand.CommandText = "INSERT INTO fournisseur (nom,commentaire,telephone,adresse,zipcode) VALUES ('" + four._Nom + "','" + four._Commentaire + "','" + four._Telephone + "','" + four._Adresse + "','" + four._Zipcode + "')";
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
 
@@ -68,7 +68,7 @@ namespace WpfApp1.wrappers
             four._Commentaire = reader.GetString(2);
             four._Telephone = reader.GetString(3);
             four._Adresse = reader.GetString(4);
-            four._Zipcode= reader.GetString(4);
+            four._Zipcode = reader.GetString(4);
             return four;
         }
 

@@ -23,8 +23,8 @@ namespace WpfApp1
         {
             //testChantierWrap();
             //testCompagnon();
-            testTraceCompagnon();
-            ManageBDD bdd =  new ManageBDD();
+            //testTraceCompagnon();
+            ManageBDD bdd = new ManageBDD();
             bdd.initBDD();
         }
         private void testChantierWrap()
@@ -35,10 +35,10 @@ namespace WpfApp1
             List<Compagnon> c1 = new List<Compagnon>();
             List<Materiaux> m1 = new List<Materiaux>();
             List<Chantier> ch1 = new List<Chantier>();
-            TraceComptable tc1 = new TraceComptable(1500,25f,25f,dateTime,(Types)1,"jaime les pattes",c1,m1, ch1);
-            TraceComptable tc2 = new TraceComptable(1500,25f,25f,dateTime,(Types)1,"jaime les pattes",c1,m1, ch1);
-            TraceComptable tc3 = new TraceComptable(1500,25f,25f,dateTime,(Types)1,"jaime les pattes",c1,m1,ch1);
-            
+            TraceComptable tc1 = new TraceComptable(1500, 25f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
+            TraceComptable tc2 = new TraceComptable(1500, 25f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
+            TraceComptable tc3 = new TraceComptable(1500, 25f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
+
             List<TraceComptable> jeffTrace = new List<TraceComptable>();
             jeffTrace.Add(tc1);
             jeffTrace.Add(tc2);
@@ -48,12 +48,12 @@ namespace WpfApp1
             traces.Add(tc2);
             traces.Add(tc3);
             List<Compagnon> compagnon = new List<Compagnon>();
-            Chantier ch= new Chantier(1500,"1500", "0778792507", dateTime,dateTime,(State)1,"jeffrey adresse","13200","jeffrey chantier","chantier test",jeffTrace,traces,compagnon);
-            Chantier ch2= new Chantier(1500,"1500", "0778792507", dateTime,dateTime,(State)1,"jeffrey adresse","13200","jeffrey chantier2","chantier test",jeffTrace,traces,compagnon);
+            Chantier ch = new Chantier(1500, "1500", "0778792507", dateTime, dateTime, (State)1, "jeffrey adresse", "13200", "jeffrey chantier", "chantier test", jeffTrace, traces, compagnon);
+            Chantier ch2 = new Chantier(1500, "1500", "0778792507", dateTime, dateTime, (State)1, "jeffrey adresse", "13200", "jeffrey chantier2", "chantier test", jeffTrace, traces, compagnon);
             wrapChantier.createChantier(ch);
             List<Chantier> ch3 = wrapChantier.searchChantierByName("jeffrey chantier");
             wrapChantier.getAllChantier();
-            wrapChantier.updateChantier(ch2,ch3[0]._Id);
+            wrapChantier.updateChantier(ch2, ch3[0]._Id);
             List<Chantier> ch4 = wrapChantier.searchChantierByName("jeffrey chantier2");
             Chantier chantier = wrapChantier.readChantier(id);
             for (int i = 0; i < ch3.Count; i++)
@@ -73,15 +73,15 @@ namespace WpfApp1
         {
             DateTime dateTime = DateTime.Now;
             WrapCompagnon wrapCompagnon = new WrapCompagnon();
-            List<Chantier> chantiers  =new List<Chantier>();
-            List<TraceComptable> tcs  =new List<TraceComptable>();
-            Compagnon compagnon = new Compagnon(1500, "jeffrey","0778792507",0,dateTime,"jesaipas","paul",chantiers,tcs,tcs);
-            Compagnon compagnon2 = new Compagnon(1500, "jeffrey2","0778792507",0,dateTime,"jesaipas","paul",chantiers,tcs,tcs);
+            List<Chantier> chantiers = new List<Chantier>();
+            List<TraceComptable> tcs = new List<TraceComptable>();
+            Compagnon compagnon = new Compagnon(1500, "jeffrey", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers, tcs, tcs);
+            Compagnon compagnon2 = new Compagnon(1500, "jeffrey2", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers, tcs, tcs);
             wrapCompagnon.createCompagnon(compagnon);
-            List<Compagnon> lc= wrapCompagnon.searchCompagnonByName("jeffrey2");
+            List<Compagnon> lc = wrapCompagnon.searchCompagnonByName("jeffrey2");
             wrapCompagnon.updateCompagnon(compagnon2, lc[0]._Id);
 
-            Compagnon c =  wrapCompagnon.readCompagnon(18);
+            Compagnon c = wrapCompagnon.readCompagnon(18);
             Console.WriteLine(c.ToString());
 
             wrapCompagnon.getAllCompagnon();
@@ -102,13 +102,13 @@ namespace WpfApp1
             List<Compagnon> c1 = new List<Compagnon>();
             List<Materiaux> m1 = new List<Materiaux>();
             List<Chantier> ch1 = new List<Chantier>();
-            TraceComptable tc1 = new TraceComptable(1500, 25f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1,ch1);
-            TraceComptable tc2 = new TraceComptable(1500, 26f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1,ch1);
+            TraceComptable tc1 = new TraceComptable(1500, 25f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
+            TraceComptable tc2 = new TraceComptable(1500, 26f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
             wrapTraceComptable.createTraceComptable(tc1);
             TraceComptable tc = wrapTraceComptable.readTraceComptable(10);
-            
 
-            List<TraceComptable> ltc =  wrapTraceComptable.searchChantierByName(25);
+
+            List<TraceComptable> ltc = wrapTraceComptable.searchChantierByName(25);
 
             for (int i = 0; i < ltc.Count; i++)
             {

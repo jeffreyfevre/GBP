@@ -25,7 +25,7 @@ namespace WpfApp1.wrapper
             initFolderBDD();
             SqliteConnection sqlite_conn = new SqliteConnection(@"Data Source=C:\ProgramData\GBD\GBP_BDD.db");
             sqlite_conn.Open();
-            var sqlCommand = sqlite_conn.CreateCommand(); 
+            var sqlCommand = sqlite_conn.CreateCommand();
             //chantier
             sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS chantier ( id_chantier   INTEGER NOT NULL, adresse   VARCHAR(50), nom_chantier  VARCHAR(50), chantier_com  VARCHAR(500), telephone VARCHAR(50),date_creation DATETIME, etat  INTEGER, zipcode   INTEGER, numero    INTEGER,date_fin  DATETIME,PRIMARY KEY(id_chantier AUTOINCREMENT))";
             sqlCommand.ExecuteNonQuery();
@@ -53,8 +53,8 @@ namespace WpfApp1.wrapper
 
             sqlCommand.CommandText = "CREATE TABLE IF NOT EXISTS trace_comptable ( id INTEGER NOT NULL, prix NUMERIC, date_creation DATETIME, type INTEGER, commentaire TEXT, temps NUMERIC, PRIMARY KEY(id AUTOINCREMENT) )";
             sqlCommand.ExecuteNonQuery();
-            
-  
+
+
 
         }
         public void initFolderBDD()
@@ -65,26 +65,26 @@ namespace WpfApp1.wrapper
             try
             {
                 // Determine whether the directory exists.
-                if(Directory.Exists( path ))
+                if (Directory.Exists(path))
                 {
-                    Console.WriteLine( "That path exists already." );
+                    Console.WriteLine("That path exists already.");
                     return;
                 }
 
                 // Try to create the directory.
-                DirectoryInfo di = Directory.CreateDirectory( path );
-                Console.WriteLine( "The directory was created successfully at {0}.", Directory.GetCreationTime( path ) );
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(path));
 
                 // Delete the directory.
                 //di.Delete();
-                Console.WriteLine( "The directory was deleted successfully." );
+                Console.WriteLine("The directory was deleted successfully.");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine( "The process failed: {0}", e.ToString() );
+                Console.WriteLine("The process failed: {0}", e.ToString());
             }
 
-           
+
         }
 
 

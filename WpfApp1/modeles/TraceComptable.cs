@@ -10,7 +10,7 @@ namespace WpfApp1.modeles
 {
     internal class TraceComptable
     {
-        
+
 
         public TraceComptable()
         {
@@ -32,7 +32,7 @@ namespace WpfApp1.modeles
         }
 
         public int _Id { get; set; }
-        public float _Prix  { get; set; }
+        public float _Prix { get; set; }
         public float _Temps { get; set; }
         public DateTime _DateCreation { get; set; }
         public enum Types

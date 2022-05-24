@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.views"
         mc:Ignorable="d"
-        Title="ChantierdWindow" Height="800" Width="450">
+        Title="ChantierWindow" Height="800" Width="450">
 
     <!--MAIN LAYOUT-->
     <Grid Margin="0,0,0,0">
@@ -60,7 +60,7 @@
                             Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" 
                             VerticalAlignment="Center" 
                             HorizontalAlignment="Center"/>
-                        <TextBox Name="PhoneBox"
+                        <TextBox x:Name="PhoneBox"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Numéro tel"
                              Text="{Binding Content}"

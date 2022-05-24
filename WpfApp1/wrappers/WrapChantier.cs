@@ -24,21 +24,21 @@ namespace WpfApp1.wrappers
 
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com,telephone,date_creation,etat,zipcode,numero,date_fin) VALUES ('"+chantier._Adresse+"','"+chantier._NomChantier+"','"+chantier._Commentaire+ "','" + chantier._Telephone + "','" + chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") +  "','" + chantier._Etat + "','" + chantier._ZipCode + "','" + chantier._Numero+ "','" + chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')";
+            sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com,telephone,date_creation,etat,zipcode,numero,date_fin) VALUES ('" + chantier._Adresse + "','" + chantier._NomChantier + "','" + chantier._Commentaire + "','" + chantier._Telephone + "','" + chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + chantier._Etat + "','" + chantier._ZipCode + "','" + chantier._Numero + "','" + chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')";
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
             insertInTableAssociation(chantier);
 
 
         }
-        
+
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
         // et pareil our GetString()
         public Chantier readChantier(int id)
         {
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "SELECT * FROM chantier WHERE id_chantier="+id;
+            sqlCommand.CommandText = "SELECT * FROM chantier WHERE id_chantier=" + id;
             SqliteDataReader rdr = sqlCommand.ExecuteReader();
             Chantier chantier = new Chantier();
             if (rdr.Read())
@@ -80,15 +80,15 @@ namespace WpfApp1.wrappers
         }
         private void updateTableAssociation(Chantier chantier, SqliteCommand sqlCommand)
         {
-            if(chantier._factures.Count != 0)
+            if (chantier._factures.Count != 0)
             {
                 for (int i = 0; i < chantier._factures.Count; i++)
                 {
-                    sqlCommand.CommandText = "UPDATE chantier_trace SET id_trace = '"+chantier._factures[i]._Id+"', id_chantier = '"+chantier._Id+"' WHERE id_chantier = '"+chantier._Id+"' AND id_trace = "+chantier._factures[i]._Id;
+                    sqlCommand.CommandText = "UPDATE chantier_trace SET id_trace = '" + chantier._factures[i]._Id + "', id_chantier = '" + chantier._Id + "' WHERE id_chantier = '" + chantier._Id + "' AND id_trace = " + chantier._factures[i]._Id;
                     sqlCommand.ExecuteNonQuery();
                 }
             }
-            if(chantier._devis.Count != 0)
+            if (chantier._devis.Count != 0)
             {
                 for (int i = 0; i < chantier._devis.Count; i++)
                 {
@@ -96,7 +96,7 @@ namespace WpfApp1.wrappers
                     sqlCommand.ExecuteNonQuery();
                 }
             }
-            if(chantier._compagnon.Count != 0)
+            if (chantier._compagnon.Count != 0)
             {
                 for (int i = 0; i < chantier._compagnon.Count; i++)
                 {
@@ -104,19 +104,19 @@ namespace WpfApp1.wrappers
                     sqlCommand.ExecuteNonQuery();
                 }
             }
-            
+
         }
         //TODO update
-        public void updateChantier(Chantier chantier,int id)
+        public void updateChantier(Chantier chantier, int id)
         {
 
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
 
-            sqlCommand.CommandText = "UPDATE chantier SET adresse ='"+chantier._Adresse +"', nom_chantier ='"+chantier._NomChantier +"', chantier_com ='"+chantier._Commentaire+"' , telephone ='"+chantier._Telephone+"', date_creation = '"+chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', etat = '"+chantier._Etat+"', zipcode = '"+chantier._ZipCode+"',numero= '"+chantier._Numero+"',date_fin = '"+chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' WHERE id_chantier ="+id;
+            sqlCommand.CommandText = "UPDATE chantier SET adresse ='" + chantier._Adresse + "', nom_chantier ='" + chantier._NomChantier + "', chantier_com ='" + chantier._Commentaire + "' , telephone ='" + chantier._Telephone + "', date_creation = '" + chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', etat = '" + chantier._Etat + "', zipcode = '" + chantier._ZipCode + "',numero= '" + chantier._Numero + "',date_fin = '" + chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' WHERE id_chantier =" + id;
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
-            if(chantier!=null)
+            if (chantier != null)
             {
                 updateTableAssociation(chantier, sqlCommand);
 
@@ -132,13 +132,13 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "DELETE FROM chantier WHERE id_chantier=" + chantier._Id;
             sqlCommand.ExecuteNonQuery();
-            if(chantier._factures.Count != 0 && chantier._devis.Count!=0)
+            if (chantier._factures.Count != 0 && chantier._devis.Count != 0)
             {
                 sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
                 sqlCommand.ExecuteNonQuery();
 
             }
-            if(chantier._compagnon.Count != 0)
+            if (chantier._compagnon.Count != 0)
             {
                 sqlCommand.CommandText = "DELETE FROM compagnon_chantier WHERE id_chantier=" + chantier._Id;
                 sqlCommand.ExecuteNonQuery();
@@ -160,7 +160,7 @@ namespace WpfApp1.wrappers
                 if (param.Value != "")
                 {
 
-                    string where = param.Key + "==\'" + param.Value+"\'";
+                    string where = param.Key + "==\'" + param.Value + "\'";
                     Query += where + " && ";
                 }
             }
@@ -183,7 +183,7 @@ namespace WpfApp1.wrappers
 
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "SELECT * FROM chantier WHERE nom_chantier='" + name+"'";
+            sqlCommand.CommandText = "SELECT * FROM chantier WHERE nom_chantier='" + name + "'";
             List<Chantier> listChantier = new List<Chantier>();
             SqliteDataReader reader = sqlCommand.ExecuteReader();
 
@@ -196,7 +196,7 @@ namespace WpfApp1.wrappers
                 Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
             }
             return listChantier;
-       }
+        }
 
         public List<Chantier> getAllChantier()
         {
@@ -211,7 +211,7 @@ namespace WpfApp1.wrappers
 
                 Chantier ch = convertDataToObject(reader);
                 ch.jToString();
-                listChantier.Add(ch);    
+                listChantier.Add(ch);
             }
             return listChantier;
         }
@@ -282,14 +282,14 @@ namespace WpfApp1.wrappers
             {
                 //je vois pas l'interet de faire ca 
                 TraceComptable devis = wrapTrace.readTraceComptable(listId[i]);
-                if(devis != null && devis._Type == 0)
+                if (devis != null && devis._Type == 0)
                 {
                     listTrace.Add(devis);
                 }
             }
             return listTrace;
         }
-        
+
         public List<Compagnon> getAllCompagnonsForOneChantier(int id)
         {
             sqlite_conn.Open();
@@ -307,12 +307,12 @@ namespace WpfApp1.wrappers
             List<Compagnon> listFacture = new List<Compagnon>();
             for (int i = 0; i < listId.Count; i++)
             {
-                Compagnon compagnon = wrapFacture.getAllCompagnon().Where(x => x._Id== listId[i]).FirstOrDefault();
+                Compagnon compagnon = wrapFacture.getAllCompagnon().Where(x => x._Id == listId[i]).FirstOrDefault();
                 listFacture.Add(compagnon);
             }
             return listFacture;
         }
-         
+
 
         private void logChantierfromReader(SqliteDataReader reader)
         {
@@ -321,6 +321,6 @@ namespace WpfApp1.wrappers
                 Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
             }
         }
-        
+
     }
 }

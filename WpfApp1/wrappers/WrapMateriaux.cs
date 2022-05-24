@@ -17,10 +17,10 @@ namespace WpfApp1.wrappers
 
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "INSERT INTO materiaux (nom,fournisseur_id,prix,description) VALUES ('" + mat._Nom + "','" + mat._FournisseurId+ "','" + mat._Prix+ "','" + mat._Description + "')";
+            sqlCommand.CommandText = "INSERT INTO materiaux (nom,fournisseur_id,prix,description) VALUES ('" + mat._Nom + "','" + mat._FournisseurId + "','" + mat._Prix + "','" + mat._Description + "')";
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
-            
+
         }
 
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
@@ -55,7 +55,7 @@ namespace WpfApp1.wrappers
             sqlCommand.ExecuteNonQuery();
 
             //pas tres beau
-            
+
         }
         private Materiaux convertDataToObject(SqliteDataReader reader)
         {

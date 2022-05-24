@@ -17,7 +17,7 @@ namespace WpfApp1.wrappers
         {
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = @"INSERT INTO facture (temps_effectif,cout_effectif,facture_com) VALUES ('" + facture._TempsEffectif+ "','" + facture._CoutEffectif + "','" + facture._Commentaire + "')";
+            sqlCommand.CommandText = @"INSERT INTO facture (temps_effectif,cout_effectif,facture_com) VALUES ('" + facture._TempsEffectif + "','" + facture._CoutEffectif + "','" + facture._Commentaire + "')";
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
 
@@ -47,8 +47,8 @@ namespace WpfApp1.wrappers
             }
             return listFacture;
         }
-    
-       //les chants du dictionnaires sont celui de la des champs de la bdd
+
+        //les chants du dictionnaires sont celui de la des champs de la bdd
         public List<Facture> searchChantierMultiParam(Dictionary<string, string> dic)
         {
             sqlite_conn.Open();
@@ -56,8 +56,8 @@ namespace WpfApp1.wrappers
             string Query = "SELECT * FROM chantier WHERE";
             //sqlCommand.CommandText = "SELECT * FROM chantier WHERE nom_chantier=" + name;
             foreach (KeyValuePair<string, string> param in dic)
-            { 
-                string where = param.Key+"="+param.Value;
+            {
+                string where = param.Key + "=" + param.Value;
                 Query += where;
             }
 
@@ -98,10 +98,10 @@ namespace WpfApp1.wrappers
         //je sais que je peux use le constructeur mais je pref comme ca
         private Facture convertDataToObject(SqliteDataReader reader)
         {
-            Facture facture= new Facture();
+            Facture facture = new Facture();
             facture._Id = reader.GetInt32(0);
             facture._TempsEffectif = reader.GetInt32(1);
-            facture._CoutEffectif= reader.GetInt32(2);
+            facture._CoutEffectif = reader.GetInt32(2);
             facture._Commentaire = reader.GetString(3);
             return facture;
         }

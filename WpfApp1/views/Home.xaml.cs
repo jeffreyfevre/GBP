@@ -6,20 +6,28 @@ using System.Windows.Forms;
 using WpfApp1.wrappers;
 using WpfApp1.wrapper;
 using System.Windows.Controls;
+using System;
 
 namespace WpfApp1.views
 {
     public partial class Home : Window
     {
-        
+
         private List<Chantier> chantiers;
         private List<Facture> factures;
         private List<Devis> devis;
         private List<Compagnon> compagnons;
+        CompagnonWindow compagnonWindow = new CompagnonWindow();
+        ChantierWindow chantierWindow = new ChantierWindow();
         public Home()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
+            this.WindowStyle = WindowStyle.None;
             init();
+
+            compagnonWindow.MessageUpdate += OnLoaded;
+            chantierWindow.MessageUpdate += OnLoaded;
         }
         private void OnLoaded()
         {
@@ -78,7 +86,6 @@ namespace WpfApp1.views
         private void OpenChantierWindow()
         {
             // Open chantierWindow into mode "new"
-            ChantierWindow chantierWindow = new ChantierWindow();
             chantierWindow.UpdateHandler += OnLoaded;
             chantierWindow.SetNewMode();
             chantierWindow.Show();
@@ -86,10 +93,10 @@ namespace WpfApp1.views
         private void OpenCompagnonWindow()
         {
             // Open compagnonWindow into mode "new"
-            CompagnonWindow compagnonWindow = new CompagnonWindow();
             compagnonWindow.UpdateHandler += OnLoaded;
             compagnonWindow.SetNewMode();
             compagnonWindow.Show();
         }
     }
+  
 }

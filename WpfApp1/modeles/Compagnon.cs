@@ -16,13 +16,13 @@ namespace WpfApp1.modeles
         public string _Commentaire { get; set; }
         public string _Prenom { get; set; }
 
-        
+
 
         public List<Chantier> _Chantiers { get; set; }
-        public List<TraceComptable> _Factures{ get; set; }
-        public List<TraceComptable> _Devis{ get; set; }
+        public List<TraceComptable> _Factures { get; set; }
+        public List<TraceComptable> _Devis { get; set; }
 
-        
+
         public Compagnon(int id, string name, string telephone, int coutHoraire, DateTime dateEmbauche, string commentaire, string prenom, List<Chantier> chantiers, List<TraceComptable> factures, List<TraceComptable> devis)
         {
             _Id = id;

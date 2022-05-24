@@ -20,9 +20,9 @@ namespace WpfApp1.wrappers
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "INSERT INTO trace_comptable (prix,date_creation,type,commentaire,temps) VALUES ('" + trace._Prix + "','" + trace._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + trace._Type + "','" + trace._Commentaire + "','" + trace._Temps + "')";
-            if(trace != null)
+            if (trace != null)
             {
-                insertInTableAssociation(trace); 
+                insertInTableAssociation(trace);
             }
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
@@ -54,7 +54,7 @@ namespace WpfApp1.wrappers
             {
                 for (int i = 0; i < tc._Materiaux.Count; i++)
                 {
-                    sqlCommand.CommandText = "INSERT INTO devis_materiaux  (id_trace,id_materiaux,prix) VALUES ('" + tc._Id + "','" + tc._Materiaux[i]._Id + "','" + tc._Prix+ "')";
+                    sqlCommand.CommandText = "INSERT INTO devis_materiaux  (id_trace,id_materiaux,prix) VALUES ('" + tc._Id + "','" + tc._Materiaux[i]._Id + "','" + tc._Prix + "')";
                     sqlCommand.ExecuteNonQuery();
                 }
             }
@@ -73,7 +73,7 @@ namespace WpfApp1.wrappers
                 return tc;
             }
             return null;
-            
+
         }
         public List<TraceComptable> searchChantierByName(int prix)
         {
@@ -119,15 +119,15 @@ namespace WpfApp1.wrappers
         {
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            
 
-            sqlCommand.CommandText = "UPDATE trace_comptable SET prix = '" + tc._Prix + "', date_creation = '" + tc._DateCreation + "', type = '" + tc._Type + "', commentaire ='" + tc._Commentaire + "' ,temps ='" + tc._Temps + "'  WHERE id = "+tc._Id;
+
+            sqlCommand.CommandText = "UPDATE trace_comptable SET prix = '" + tc._Prix + "', date_creation = '" + tc._DateCreation + "', type = '" + tc._Type + "', commentaire ='" + tc._Commentaire + "' ,temps ='" + tc._Temps + "'  WHERE id = " + tc._Id;
             sqlCommand.ExecuteNonQuery();
-            if(tc != null)
+            if (tc != null)
             {
                 updateTableAssociation(tc, sqlCommand);
             }
-                
+
         }
         public void deleteFacture(TraceComptable trace)
         {
@@ -150,15 +150,15 @@ namespace WpfApp1.wrappers
             trace._Prix = reader.GetInt32(1);
             trace._DateCreation = reader.GetDateTime(2);
             trace._Type = (Types)reader.GetInt32(3);
-            trace._Temps  = reader.GetInt32(5);
-            trace._Commentaire  = reader.GetString(4);
-            trace._Materiaux= getAllMateriauxForOneTrace(trace._Id);
-            trace._Compagnon= getAllCompagnonsForOneTrace(trace._Id);
-            trace._Chantiers= getAllChantiernsForOneTrace(trace._Id);
+            trace._Temps = reader.GetInt32(5);
+            trace._Commentaire = reader.GetString(4);
+            trace._Materiaux = getAllMateriauxForOneTrace(trace._Id);
+            trace._Compagnon = getAllCompagnonsForOneTrace(trace._Id);
+            trace._Chantiers = getAllChantiernsForOneTrace(trace._Id);
 
             return trace;
         }
-        
+
         public List<TraceComptable> getAllFacture()
         {
             List<TraceComptable> listFacture = new List<TraceComptable>();
@@ -192,7 +192,7 @@ namespace WpfApp1.wrappers
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             List<int> listId = new List<int>();
-            sqlCommand.CommandText = "SELECT * FROM devis_materiaux WHERE id_materiaux=" + id ;
+            sqlCommand.CommandText = "SELECT * FROM devis_materiaux WHERE id_materiaux=" + id;
             SqliteDataReader reader = sqlCommand.ExecuteReader();
 
             while (reader.Read())
@@ -270,7 +270,7 @@ namespace WpfApp1.wrappers
             Query = Query.Substring(0, Query.Length - 3);
             sqlCommand.CommandText = Query;
             Console.WriteLine(Query);
-            List<TraceComptable> listTrace= new List<TraceComptable>();
+            List<TraceComptable> listTrace = new List<TraceComptable>();
             SqliteDataReader reader = sqlCommand.ExecuteReader();
 
             while (reader.Read())

@@ -134,14 +134,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChantierWindowC.xaml.cs">
-      <DependentUpon>ChantierWindowC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="views\ChantierWindow.xaml.cs">
       <DependentUpon>ChantierWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CompagnonWindowC.xaml.cs">
-      <DependentUpon>CompagnonWindowC.xaml</DependentUpon>
     </Compile>
     <Compile Include="controllers\CompagnonController.cs" />
     <Compile Include="controllers\FacturesController.cs" />
@@ -171,15 +165,7 @@
     <Compile Include="wrappers\WrapCompagnon.cs" />
     <Compile Include="wrappers\WrapDevis.cs" />
     <Compile Include="wrappers\WrapFacture.cs" />
-    <Page Include="ChantierWindowC.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="views\ChantierWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CompagnonWindowC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -187,16 +173,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="views\Home.xaml">

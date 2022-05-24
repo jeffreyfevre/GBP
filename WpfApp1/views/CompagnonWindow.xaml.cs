@@ -77,7 +77,7 @@ namespace WpfApp1.views
         private void ValidButton_Click(object sender, RoutedEventArgs e)
         {
             int tarif = 0;
-            if (int.TryParse( TarifHorraireBox.Text, out tarif ))
+            if (int.TryParse(TarifHorraireBox.Text, out tarif))
             {
                 //Compagnon nCompagnon = new Compagnon(
                 //    0,

@@ -31,10 +31,10 @@ namespace WpfApp1.modeles
         public string _Nom { get; set; }
         public string _Telephone { get; set; }
         public string _Adresse { get; set; }
-        public string _Zipcode { get; set; }    
+        public string _Zipcode { get; set; }
         public string _Commentaire { get; set; }
-        public List<TraceComptable> _Devis{ get; set; }
-        public List<TraceComptable> _Facture{ get; set; }
+        public List<TraceComptable> _Devis { get; set; }
+        public List<TraceComptable> _Facture { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

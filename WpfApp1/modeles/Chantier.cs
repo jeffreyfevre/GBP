@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 
 namespace WpfApp1.modeles
-{   
+{
     internal class Chantier
     {
         public int _Id { get; set; }
-        public enum State 
+        public enum State
         {
             // items of the enum
-            Inconnue=0,
+            Inconnue = 0,
             [Description("En cours")]
-            Encours=1,    //0
-            Programme=2,   //1
-            Termine=3,      //2
-            Annule=4,      //3
-                   
+            Encours = 1,    //0
+            Programme = 2,   //1
+            Termine = 3,      //2
+            Annule = 4,      //3
+
         }
         public string _Numero { get; set; }
         public string _Telephone { get; set; }
@@ -31,7 +31,7 @@ namespace WpfApp1.modeles
         public DateTime _DateFin { get; set; }
         public State _Etat { get; set; }
         public string _Adresse { get; set; }
-        public string _ZipCode{ get; set; }
+        public string _ZipCode { get; set; }
         public string _NomChantier { get; set; }
         public string _Commentaire { get; set; }
         public List<TraceComptable> _devis { get; set; }
@@ -41,7 +41,7 @@ namespace WpfApp1.modeles
         {
             return "id : " + this._Id.ToString() + ", adresse : " + this._Adresse + ", nom chantier : " + this._NomChantier + ", commentaire :" + this._Commentaire;
         }
-        
+
 
         public Chantier()
         {

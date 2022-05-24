@@ -24,6 +24,6 @@ namespace WpfApp1.utils
             return query;
 
         }
-        
+
     }
 }
