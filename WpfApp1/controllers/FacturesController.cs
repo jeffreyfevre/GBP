@@ -21,11 +21,8 @@ namespace WpfApp1
         //    dataChantier.ItemsSource = lch;
         //}
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            e.Cancel = true; // this will prevent to close
-            this.Hide(); // it'll hide the window
-                         // here now you can call any method   
-        }
+
+
+
     }
 }
