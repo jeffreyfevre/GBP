@@ -7,23 +7,18 @@ using WpfApp1.wrappers;
 using WpfApp1.modeles;
 using System;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace WpfApp1.views
 {
     /// <summary>
     /// Logique d'interaction pour ChantierWindow.xaml
     /// </summary>
-    public partial class ChantierWindow : Window
+    public partial class TraceComptableWindow : Window
     {
         public delegate void ViewUpdateEvent();
         public event ViewUpdateEvent UpdateHandler;
         private WrapChantier chantierController = new WrapChantier();
-        private WrapTraceComptable chantierTraceComptable = new WrapTraceComptable();
-        List<TraceComptable> traceComptables = new List<TraceComptable>();
-
-        public ChantierWindow()
+        public TraceComptableWindow()
         {
             InitializeComponent();
         }
@@ -43,7 +38,7 @@ namespace WpfApp1.views
         }
         public void SetNewMode()
         {
-            EditButton.Visibility = Visibility.Collapsed;
+            //EditButton.Visibility = Visibility.Collapsed;
         }
         private static readonly Regex _regex = new Regex("[0-9]");
         private static bool IsTextAllowed(string text)
@@ -77,8 +72,7 @@ namespace WpfApp1.views
             base.OnContentRendered(e);
             WrapTraceComptable wrapDevis = new WrapTraceComptable();
 
-            DevisList.ItemsSource = wrapDevis.getAllDevis();
-            FactureList.ItemsSource = wrapDevis.getAllFacture();
+
 
             // Your code here.
         }
@@ -88,19 +82,5 @@ namespace WpfApp1.views
 
         }
 
-        private void DevisList_TouchDown(object sender, TouchEventArgs e)
-        {
-        }
-
-        private void DevisList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            JObject json = JObject.Parse(DevisList.SelectedItem.ToString());
-
-            TraceComptable t = chantierTraceComptable.readTraceComptable(int.Parse(json["_Id"].ToString()));           
-            traceComptables.Add(t);
-   
-            DevisDataGrid.ItemsSource = traceComptables;
-            DevisDataGrid.Items.Refresh();
-        }
     }
 }

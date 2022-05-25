@@ -134,6 +134,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="views\TraceComptableWindow.xaml.cs">
+      <DependentUpon>TraceComptableWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\ChantierWindow.xaml.cs">
       <DependentUpon>ChantierWindow.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
     <Compile Include="wrappers\WrapCompagnon.cs" />
     <Compile Include="wrappers\WrapDevis.cs" />
     <Compile Include="wrappers\WrapFacture.cs" />
+    <Page Include="views\TraceComptableWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="views\ChantierWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

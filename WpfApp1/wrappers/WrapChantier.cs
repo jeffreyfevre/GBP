@@ -57,7 +57,7 @@ namespace WpfApp1.wrappers
                 for (int i = 0; i < chantier._factures.Count; i++)
                 {
 
-                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + chantier._factures[i] + "','" + chantier._Id + "')";
+                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + chantier._factures[i]._Id + "','" + chantier._Id + "')";
                     sqlCommand.ExecuteNonQuery();
                 }
             }
@@ -65,11 +65,11 @@ namespace WpfApp1.wrappers
             {
                 for (int i = 0; i < chantier._devis.Count; i++)
                 {
-                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + chantier._devis[i] + "','" + chantier._Id + "')";
+                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + chantier._devis[i]._Id + "','" + chantier._Id + "')";
                     sqlCommand.ExecuteNonQuery();
                 }
             }
-            if (chantier._devis != null)
+            if (chantier._compagnon != null)
             {
                 for (int i = 0; i < chantier._compagnon.Count; i++)
                 {

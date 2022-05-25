@@ -19,6 +19,7 @@ namespace WpfApp1.views
         private List<Compagnon> compagnons;
         CompagnonWindow compagnonWindow = new CompagnonWindow();
         ChantierWindow chantierWindow = new ChantierWindow();
+        TraceComptableWindow traceComptableWindow = new TraceComptableWindow();
         public Home()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace WpfApp1.views
 
             compagnonWindow.MessageUpdate += OnLoaded;
             chantierWindow.MessageUpdate += OnLoaded;
+            traceComptableWindow.MessageUpdate += OnLoaded;
         }
         private void OnLoaded()
         {
@@ -96,6 +98,12 @@ namespace WpfApp1.views
             compagnonWindow.UpdateHandler += OnLoaded;
             compagnonWindow.SetNewMode();
             compagnonWindow.Show();
+        }
+
+        private void MainAddDevisButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            traceComptableWindow.Show();
         }
     }
   

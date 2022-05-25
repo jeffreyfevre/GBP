@@ -86,11 +86,19 @@
                     <Label Name="LabelDevis" Margin="8"
                            Content="Devis" 
                            Foreground="Gray"/>
-                    <DataGrid x:Name="DevisDataGrid" 
-                          Margin="8"
+                    <ComboBox Name="DevisList" Margin="8"
+                              materialDesign:HintAssist.Hint="Devis" TouchDown="DevisList_TouchDown" SelectionChanged="DevisList_SelectionChanged">
+                        
+                    </ComboBox>
+                    <DataGrid x:Name="DevisDataGrid"  AutoGenerateColumns="True"
+                          Margin="8" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="True"
                           Style="{StaticResource MaterialDesignDataGrid}"
-                          materialDesign:HintAssist.Hint="Chantiers"/>
+                          materialDesign:HintAssist.Hint="Chantiers" SelectionChanged="DevisDataGrid_SelectionChanged"/>
                     <Label Name="LabelFacture" Content="Factures" Foreground="Gray"/>
+                    <ComboBox Name="FactureList" Margin="8"
+                              materialDesign:HintAssist.Hint="Factures">
+
+                    </ComboBox>
                     <DataGrid x:Name="FacturesDataGrid" 
                           Margin="8"
                           Style="{StaticResource MaterialDesignDataGrid}"

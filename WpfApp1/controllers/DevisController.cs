@@ -5,9 +5,9 @@ using WpfApp1.wrappers;
 using System.Linq;
 using System.ComponentModel;
 
-namespace WpfApp1
+namespace WpfApp1.views
 {
-    public partial class MainWindow : Window
+    public partial class TraceComptableWindow : Window
     {
         //private void searchDevis_Click(object sender, RoutedEventArgs e)
         //{
@@ -17,6 +17,17 @@ namespace WpfApp1
         //    //List<Devis> lch = WC.getAllDevis().Where(x => x._Id== int.Parse(id_devis.Text)&& tempsprevuDevis.Text==x._TempsPrevu && coutPrevuDevis.Text == x._CoutPrevu ).ToList();
         //    // dataChantier.ItemsSource = lch;
         //}
+        public delegate void ChatMsgDelegate();
+        public event ChatMsgDelegate MessageUpdate;
+        private void ValidButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            WrapTraceComptable wrapTraceComptable = new WrapTraceComptable();
+
+            wrapTraceComptable.createTraceComptable(new TraceComptable(0, float.Parse(PriceBox.Text), float.Parse(TimeBox.Text), System.DateTime.Now, 0, CommantaryBox.Text, new List<Compagnon>(), new List<Materiaux>(), new List<Chantier>()));
+
+        }
+
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = true; // this will prevent to close
