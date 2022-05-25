@@ -23,8 +23,9 @@ namespace WpfApp1.views
         {
 
             WrapTraceComptable wrapTraceComptable = new WrapTraceComptable();
-
-            wrapTraceComptable.createTraceComptable(new TraceComptable(0, float.Parse(PriceBox.Text), float.Parse(TimeBox.Text), System.DateTime.Now, (TraceComptable.Types)type , CommantaryBox.Text, new List<Compagnon>(), new List<Materiaux>(), new List<Chantier>()));
+            if ((bool)Vente.IsChecked)
+                type = 2;
+            wrapTraceComptable.createTraceComptable(new TraceComptable(0, float.Parse(PriceBox.Text), float.Parse(TimeBox.Text), System.DateTime.Now, (TraceComptable.Types)type , CommantaryBox.Text, new List<Compagnon>(), new List<Materiaux>(), chantiers));
             this.Hide();
         }
 

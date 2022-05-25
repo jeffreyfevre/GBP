@@ -32,6 +32,7 @@
         <ScrollViewer Grid.Row="2">
             <Grid x:Name="ContentGrid">
                 <StackPanel Grid.Row="0" Margin="8">
+                    <CheckBox x:Name="Vente" Content="Facture de vente" ></CheckBox>
                     <TextBox Name="PriceBox" Margin="8"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Prix du Devis"
