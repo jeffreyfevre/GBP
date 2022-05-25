@@ -16,7 +16,7 @@ namespace WpfApp1.views
 
             WrapChantier WC = new WrapChantier();
             
-            Chantier chant = new Chantier(0,"1",PhoneBox.Text, StartDate.SelectedDate.Value, StartDate.SelectedDate.Value, Chantier.State.Encours, AdressBox.Text, ZipCodeBox.Text, NameBox.Text, CommantaryBox.Text, traceComptables, null, null);
+            Chantier chant = new Chantier(0,"1",PhoneBox.Text, StartDate.SelectedDate.Value, StartDate.SelectedDate.Value, Chantier.State.Encours, AdressBox.Text, ZipCodeBox.Text, NameBox.Text, CommantaryBox.Text, traceComptablesDevis, traceComptablesFacture, null);
             WC.createChantier(chant);
             MessageUpdate();
             this.Hide();

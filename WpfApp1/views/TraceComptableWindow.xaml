@@ -43,9 +43,9 @@
                              Text="{Binding Content}" 
                              VerticalAlignment="Bottom"/>
                     <ComboBox Name="ChantierComboBox" Margin="8"
-                              materialDesign:HintAssist.Hint="Chantier">
+                              materialDesign:HintAssist.Hint="Chantier" SelectionChanged="ChantierComboBox_SelectionChanged">
                     </ComboBox>
-                    <DataGrid x:Name="CanhtierDataGrid" AutoGenerateColumns="True"
+                    <DataGrid x:Name="ChantierDataGrid" AutoGenerateColumns="True"
                           Margin="8"
                           Style="{StaticResource MaterialDesignDataGrid}"
                           materialDesign:HintAssist.Hint="Chantiers" SelectionChanged="DevisDataGrid_SelectionChanged"/>

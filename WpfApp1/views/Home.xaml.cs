@@ -100,9 +100,15 @@ namespace WpfApp1.views
             compagnonWindow.Show();
         }
 
-        private void MainAddDevisButton_Click(object sender, RoutedEventArgs e)
+        private void OpenDevisWindow(object sender, RoutedEventArgs e)
         {
-
+            traceComptableWindow.type = 0;
+            traceComptableWindow.Show();
+        }
+        
+        private void OpenFactureWindow(object sender, RoutedEventArgs e)
+        {
+            traceComptableWindow.type = 1;
             traceComptableWindow.Show();
         }
     }

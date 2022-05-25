@@ -19,9 +19,11 @@ namespace WpfApp1.views
     {
         public delegate void ViewUpdateEvent();
         public event ViewUpdateEvent UpdateHandler;
-        private WrapChantier chantierController = new WrapChantier();
-        private WrapTraceComptable chantierTraceComptable = new WrapTraceComptable();
-        List<TraceComptable> traceComptables = new List<TraceComptable>();
+        private WrapTraceComptable wrapTraceComptable = new WrapTraceComptable();
+        private WrapCompagnon wrapCompagnon = new WrapCompagnon();
+        List<TraceComptable> traceComptablesDevis = new List<TraceComptable>();
+        List<TraceComptable> traceComptablesFacture = new List<TraceComptable>();
+        List<Compagnon> compagnons = new List<Compagnon>();
 
         public ChantierWindow()
         {
@@ -75,12 +77,11 @@ namespace WpfApp1.views
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);
-            WrapTraceComptable wrapDevis = new WrapTraceComptable();
 
-            DevisList.ItemsSource = wrapDevis.getAllDevis();
-            FactureList.ItemsSource = wrapDevis.getAllFacture();
-
-            // Your code here.
+            DevisList.ItemsSource = wrapTraceComptable.getAllDevis();
+            FactureList.ItemsSource = wrapTraceComptable.getAllFacture();
+            CompagnonList.ItemsSource = wrapCompagnon.getAllCompagnon();
+            
         }
 
         private void DevisDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -91,16 +92,37 @@ namespace WpfApp1.views
         private void DevisList_TouchDown(object sender, TouchEventArgs e)
         {
         }
+        private void CompagnonList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            JObject json = JObject.Parse(DevisList.SelectedItem.ToString());
+            Compagnon compagnon = wrapCompagnon.readCompagnon(int.Parse(json["_Id"].ToString()));
 
+            compagnons.Add(compagnon);
+
+            CompagnonDataGrid.ItemsSource = compagnons;
+            CompagnonDataGrid.Items.Refresh();
+
+        }
         private void DevisList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             JObject json = JObject.Parse(DevisList.SelectedItem.ToString());
 
-            TraceComptable t = chantierTraceComptable.readTraceComptable(int.Parse(json["_Id"].ToString()));           
-            traceComptables.Add(t);
+            TraceComptable t = wrapTraceComptable.readTraceComptable(int.Parse(json["_Id"].ToString()));
+            traceComptablesDevis.Add(t);
    
-            DevisDataGrid.ItemsSource = traceComptables;
+            DevisDataGrid.ItemsSource = traceComptablesDevis;
             DevisDataGrid.Items.Refresh();
+        }
+
+        private void FactureList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            JObject json = JObject.Parse(FactureList.SelectedItem.ToString());
+
+            TraceComptable t = wrapTraceComptable.readTraceComptable(int.Parse(json["_Id"].ToString()));
+            traceComptablesFacture.Add(t);
+
+            FacturesDataGrid.ItemsSource = traceComptablesFacture;
+            FacturesDataGrid.Items.Refresh();
         }
     }
 }

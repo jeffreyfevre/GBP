@@ -73,18 +73,6 @@
                     <DatePicker Name="StartDate" Margin="8"
                             materialDesign:HintAssist.Hint="Date Embauche" 
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                    <Label Name="LabelChantier" Margin="8"
-                       Content="Chantiers" Foreground="Gray"/>
-                    <DataGrid x:Name="ChantiersDataGrid" Margin="8"
-                          Style="{StaticResource MaterialDesignDataGrid}"
-                          materialDesign:HintAssist.Hint="Chantiers"/>
-                    <Label Name="LabelFacture" Margin="8"
-                       Content="Factures" 
-                       Foreground="Gray"/>
-                    <DataGrid x:Name="FacturesDataGrid" Margin="8"
-                          Style="{StaticResource MaterialDesignDataGrid}"
-                          materialDesign:HintAssist.Hint="Chantiers"/>
-
                     <TextBox Name="CommantaryBox" Margin="8"
                         TextWrapping="Wrap"
                         VerticalAlignment="Stretch"

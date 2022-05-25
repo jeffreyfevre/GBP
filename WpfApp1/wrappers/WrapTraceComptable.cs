@@ -164,7 +164,7 @@ namespace WpfApp1.wrappers
             List<TraceComptable> listFacture = new List<TraceComptable>();
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            sqlCommand.CommandText = "SELECT * FROM trace_comptable WHERE type=1";
+            sqlCommand.CommandText = "SELECT * FROM trace_comptable WHERE type=\"Facture\"";
             SqliteDataReader reader = sqlCommand.ExecuteReader();
             while (reader.Read())
             {

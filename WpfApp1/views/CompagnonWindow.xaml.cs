@@ -23,8 +23,6 @@ namespace WpfApp1.views
         public CompagnonWindow()
         {
             InitializeComponent();
-            List<Chantier> chantiers = chantierController.getAllChantier();
-            ChantiersDataGrid.ItemsSource = chantiers;
         }
         private static readonly Regex _regex = new Regex("[0-9]");
 

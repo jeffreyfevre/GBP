@@ -31,7 +31,7 @@
             </Image>
         </Grid>
         <!--CONTENT-->
-        <ScrollViewer Grid.Row="2">
+        <ScrollViewer Grid.Row="2" Margin="10,10.2,-9.8,44.4" Grid.RowSpan="2">
             <Grid x:Name="ContentGrid">
                 <StackPanel Grid.Row="0" Margin="8">
                     <TextBox Name="NameBox" Margin="8"
@@ -96,13 +96,22 @@
                           materialDesign:HintAssist.Hint="Chantiers" SelectionChanged="DevisDataGrid_SelectionChanged"/>
                     <Label Name="LabelFacture" Content="Factures" Foreground="Gray"/>
                     <ComboBox Name="FactureList" Margin="8"
-                              materialDesign:HintAssist.Hint="Factures">
+                              materialDesign:HintAssist.Hint="Factures" SelectionChanged="FactureList_SelectionChanged">
 
                     </ComboBox>
                     <DataGrid x:Name="FacturesDataGrid" 
                           Margin="8"
                           Style="{StaticResource MaterialDesignDataGrid}"
                           materialDesign:HintAssist.Hint="Chantiers"/>
+                    <Label Name="LabelCompagnon" Content="Compagnons" Foreground="Gray"/>
+                    <ComboBox Name="CompagnonList" Margin="8"
+                              materialDesign:HintAssist.Hint="Compagnon" SelectionChanged="CompagnonList_SelectionChanged">
+
+                    </ComboBox>
+                    <DataGrid x:Name="CompagnonDataGrid" 
+                          Margin="8"
+                          Style="{StaticResource MaterialDesignDataGrid}"
+                          materialDesign:HintAssist.Hint="Compagnon"/>
                     <TextBox Name="CommantaryBox" Margin="8"
                         TextWrapping="Wrap"
                         VerticalAlignment="Stretch"

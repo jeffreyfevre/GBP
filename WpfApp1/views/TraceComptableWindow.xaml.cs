@@ -7,6 +7,7 @@ using WpfApp1.wrappers;
 using WpfApp1.modeles;
 using System;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace WpfApp1.views
 {
@@ -17,7 +18,10 @@ namespace WpfApp1.views
     {
         public delegate void ViewUpdateEvent();
         public event ViewUpdateEvent UpdateHandler;
+        public  int type = -1;
         private WrapChantier chantierController = new WrapChantier();
+        private List<Chantier> chantiers = new List<Chantier>();
+
         public TraceComptableWindow()
         {
             InitializeComponent();
@@ -29,7 +33,8 @@ namespace WpfApp1.views
             CancelButton.Visibility = Visibility.Visible;
             EditButton.Visibility = Visibility.Hidden;
         }
-        public void SetReadMode()
+
+            public void SetReadMode()
         {
             ContentGrid.IsEnabled = false;
             ValidButton.Visibility = Visibility.Hidden;
@@ -72,7 +77,7 @@ namespace WpfApp1.views
             base.OnContentRendered(e);
             WrapTraceComptable wrapDevis = new WrapTraceComptable();
 
-
+            ChantierComboBox.ItemsSource = chantierController.getAllChantier();
 
             // Your code here.
         }
@@ -82,5 +87,17 @@ namespace WpfApp1.views
 
         }
 
+        private void ChantierComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            JObject json = JObject.Parse(ChantierComboBox.SelectedItem.ToString());
+
+            Chantier t = chantierController.readChantier(int.Parse(json["_Id"].ToString()));
+            chantiers.Add(t);
+
+            ChantierDataGrid.ItemsSource = chantiers;
+            ChantierDataGrid.Items.Refresh();
+
+        }
     }
 }
