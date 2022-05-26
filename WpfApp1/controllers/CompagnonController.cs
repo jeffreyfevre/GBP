@@ -16,7 +16,7 @@ namespace WpfApp1.views
         {
 
             WrapCompagnon WC = new WrapCompagnon();
-            Compagnon compagnon = new Compagnon(0,NameBox.Text,PhoneBox.Text, int.Parse(TarifHorraireBox.Text), StartDate.SelectedDate.Value,CommantaryBox.Text,SurnameBox.Text,new List<Chantier>(),new List<TraceComptable>(),new List<TraceComptable>()) ;
+            Compagnon compagnon = new Compagnon(0,NameBox.Text,PhoneBox.Text, int.Parse(TarifHorraireBox.Text), StartDate.SelectedDate.Value,CommantaryBox.Text,SurnameBox.Text,new List<Chantier>()) ;
             WC.createCompagnon(compagnon);
             MessageUpdate();
             this.Hide();

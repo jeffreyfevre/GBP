@@ -19,11 +19,10 @@ namespace WpfApp1.modeles
 
 
         public List<Chantier> _Chantiers { get; set; }
-        public List<TraceComptable> _Factures { get; set; }
-        public List<TraceComptable> _Devis { get; set; }
 
 
-        public Compagnon(int id, string name, string telephone, int coutHoraire, DateTime dateEmbauche, string commentaire, string prenom, List<Chantier> chantiers, List<TraceComptable> factures, List<TraceComptable> devis)
+
+        public Compagnon(int id, string name, string telephone, int coutHoraire, DateTime dateEmbauche, string commentaire, string prenom, List<Chantier> chantiers)
         {
             _Id = id;
             _Name = name;
@@ -33,8 +32,6 @@ namespace WpfApp1.modeles
             _Commentaire = commentaire;
             _Prenom = prenom;
             _Chantiers = chantiers;
-            _Factures = factures;
-            _Devis = devis;
             Console.WriteLine("L'objet créé : " + this.ToString());
         }
         public Compagnon()

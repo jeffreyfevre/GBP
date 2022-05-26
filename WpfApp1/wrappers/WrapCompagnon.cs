@@ -22,18 +22,14 @@ namespace WpfApp1.wrappers
             sqlCommand.CommandText = "INSERT INTO compagnon (nom,telephone,cout_horaire,date_embauche,compagnon_com,prenom) VALUES ('" + compagnon._Name + "','" + compagnon._Telephone + "','" + compagnon._CoutHoraire + "','" + compagnon._DateEmbauche.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + compagnon._Commentaire + "','" + compagnon._Prenom + "')";
             Console.WriteLine(sqlCommand.CommandText);
             SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            Compagnon lastComp = getLastCompagnonAdded();
             for (int i = 0; i < compagnon._Chantiers.Count; i++)
             {
 
-                sqlCommand.CommandText = "INSERT INTO compagnons_chantier  (id_chantier,id_compagnon) VALUES ('" + compagnon._Chantiers[i]._Id + "','" + compagnon._Id + "')";
+                sqlCommand.CommandText = "INSERT INTO compagnons_chantier  (id_chantier,id_compagnon) VALUES ('" + compagnon._Chantiers[i]._Id + "','" + lastComp._Id + "')";
                 sqlCommand.ExecuteNonQuery();
             }
-            for (int i = 0; i < compagnon._Factures.Count; i++)
-            {
-
-                sqlCommand.CommandText = "INSERT INTO devis_compagnon  (id_trace,id_compagnon,prix) VALUES ('" + compagnon._Factures[i]._Id + "','" + compagnon._Id + "','" + compagnon._Factures[i]._Prix + "')";
-                sqlCommand.ExecuteNonQuery();
-            }
+            
 
         }
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
@@ -53,23 +49,22 @@ namespace WpfApp1.wrappers
 
             sqlCommand.CommandText = "UPDATE compagnon SET nom = '" + compagnon._Name + "', telephone = '" + compagnon._Telephone + "', cout_horaire = '" + compagnon._CoutHoraire + "', date_embauche = '" + compagnon._DateEmbauche.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', compagnon_com = '" + compagnon._Commentaire + "',prenom = '" + compagnon._Prenom + "' WHERE id_compagnon =" + id;
             sqlCommand.ExecuteNonQuery();
+            sqlCommand.CommandText = "DELETE FROM compagnons_chantier WHERE id_compagnon=" + id;
+            sqlCommand.ExecuteNonQuery();
             for (int i = 0; i < compagnon._Chantiers.Count; i++)
             {
-                sqlCommand.CommandText = "UPDATE compagnons_chantier SET id_compagnon = '" + compagnon._Id + "', id_chantier = '" + compagnon._Chantiers[i]._Id + "' WHERE id_chantier = " + compagnon._Chantiers[i]._Id + " AND id_compagnon=" + id;
-                sqlCommand.ExecuteNonQuery();
-            }
-            for (int i = 0; i < compagnon._Factures.Count; i++)
-            {
-                sqlCommand.CommandText = "UPDATE devis_compagnons SET id_compagnon = '" + compagnon._Id + "', id_chantier = '" + compagnon._Factures[i]._Id + "' WHERE id_chantier = " + compagnon._Factures[i]._Id + " AND id_compagnon=" + id;
-                sqlCommand.ExecuteNonQuery();
-            }
-            for (int i = 0; i < compagnon._Devis.Count; i++)
-            {
-                sqlCommand.CommandText = "UPDATE devis_compagnons SET id_compagnon = '" + compagnon._Id + "', id_chantier = '" + compagnon._Devis[i]._Id + "' WHERE id_chantier = " + compagnon._Devis[i]._Id + " AND id_compagnon=" + id;
-                sqlCommand.ExecuteNonQuery();
-            }
-        }
 
+                sqlCommand.CommandText = "INSERT INTO compagnons_chantier  (id_chantier,id_compagnon) VALUES ('" + compagnon._Chantiers[i]._Id + "','" + compagnon._Id + "')";
+                sqlCommand.ExecuteNonQuery();
+            }
+
+        }
+        public Compagnon getLastCompagnonAdded()
+        {
+            List<Compagnon> allComp = getAllCompagnon();
+            Compagnon lastCompagnon = allComp[allComp.Count - 1];
+            return lastCompagnon;
+        }
         public void deleteCompagnon(int id)
         {
             sqlite_conn.Open();
@@ -78,8 +73,7 @@ namespace WpfApp1.wrappers
             sqlCommand.ExecuteNonQuery();
             sqlCommand.CommandText = "DELETE FROM compagnons_chantier WHERE id_compagnon=" + id;
             sqlCommand.ExecuteNonQuery();
-            sqlCommand.CommandText = "DELETE FROM compagnons_chantier WHERE id_compagnon=" + id;
-            sqlCommand.ExecuteNonQuery();
+            
 
         }
         public List<Compagnon> getAllCompagnon()
@@ -152,7 +146,6 @@ namespace WpfApp1.wrappers
             compagnon._DateEmbauche = reader.GetDateTime(4);
             compagnon._Commentaire = reader.GetString(5);
             compagnon._Chantiers = getAllChantiersForOneCompagnon(compagnon._Id);
-            compagnon._Factures = getAllFacturesForOneCompagnon(compagnon._Id);
 
             return compagnon;
         }

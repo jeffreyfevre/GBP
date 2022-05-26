@@ -75,8 +75,8 @@ namespace WpfApp1
             WrapCompagnon wrapCompagnon = new WrapCompagnon();
             List<Chantier> chantiers = new List<Chantier>();
             List<TraceComptable> tcs = new List<TraceComptable>();
-            Compagnon compagnon = new Compagnon(1500, "jeffrey", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers, tcs, tcs);
-            Compagnon compagnon2 = new Compagnon(1500, "jeffrey2", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers, tcs, tcs);
+            Compagnon compagnon = new Compagnon(1500, "jeffrey", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers );
+            Compagnon compagnon2 = new Compagnon(1500, "jeffrey2", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers);
             wrapCompagnon.createCompagnon(compagnon);
             List<Compagnon> lc = wrapCompagnon.searchCompagnonByName("jeffrey2");
             wrapCompagnon.updateCompagnon(compagnon2, lc[0]._Id);
