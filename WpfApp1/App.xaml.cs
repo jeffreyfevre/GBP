@@ -78,20 +78,20 @@ namespace WpfApp1
             Compagnon compagnon = new Compagnon(1500, "jeffrey", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers );
             Compagnon compagnon2 = new Compagnon(1500, "jeffrey2", "0778792507", 0, dateTime, "jesaipas", "paul", chantiers);
             wrapCompagnon.createCompagnon(compagnon);
-            List<Compagnon> lc = wrapCompagnon.searchCompagnonByName("jeffrey2");
+            List<Compagnon> lc = wrapCompagnon.searchCompagnonByName("jeffrey");
             wrapCompagnon.updateCompagnon(compagnon2, lc[0]._Id);
-
-            Compagnon c = wrapCompagnon.readCompagnon(18);
+            Compagnon comp = wrapCompagnon.getLastCompagnonAdded();
+            Compagnon c = wrapCompagnon.readCompagnon(comp._Id);
             Console.WriteLine(c.ToString());
 
             wrapCompagnon.getAllCompagnon();
-            for (int i = 0; i < lc.Count; i++)
-            {
+            //for (int i = 0; i < lc.Count; i++)
+            //{
 
-                Console.WriteLine(lc[i].ToString());
-                wrapCompagnon.deleteCompagnon(lc[i]._Id);
+            //    Console.WriteLine(lc[i].ToString());
+            //    wrapCompagnon.deleteCompagnon(lc[i]._Id);
 
-            }
+            //}
 
         }
         private void testTraceCompagnon()
@@ -105,7 +105,7 @@ namespace WpfApp1
             TraceComptable tc1 = new TraceComptable(1500, 25f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
             TraceComptable tc2 = new TraceComptable(1500, 26f, 25f, dateTime, (Types)1, "jaime les pattes", c1, m1, ch1);
             wrapTraceComptable.createTraceComptable(tc1);
-            TraceComptable tc = wrapTraceComptable.readTraceComptable(10);
+            //TraceComptable tc = wrapTraceComptable.readTraceComptable(10);
 
 
             List<TraceComptable> ltc = wrapTraceComptable.searchChantierByName(25);

@@ -17,19 +17,53 @@ namespace WpfApp1.wrappers
         public void createTraceComptable(TraceComptable trace)
         {
 
-            sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "INSERT INTO trace_comptable (prix,date_creation,type,commentaire,temps) VALUES ('" + trace._Prix + "','" + trace._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + trace._Type + "','" + trace._Commentaire + "','" + trace._Temps + "')";
+            sqlite_conn.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlite_conn.Close();
+
             TraceComptable tc = getLastTraceAdded();
             if (tc != null)
             {
-                insertInTableAssociation(tc);
+                insertInTableAssociation2(trace,tc._Id);
             }
             Console.WriteLine(sqlCommand.CommandText);
-            sqlCommand.ExecuteNonQuery();
+            
 
         }
         private void insertInTableAssociation(TraceComptable tc)
+        {
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+
+            if (tc._Chantiers.Count != 0)
+            {
+                for (int i = 0; i < tc._Chantiers.Count; i++)
+                {
+
+                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + tc._Id + "','" + tc._Chantiers[i]._Id + "')";
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            if (tc._Compagnon.Count != 0)
+            {
+                for (int i = 0; i < tc._Compagnon.Count; i++)
+                {
+                    sqlCommand.CommandText = "INSERT INTO devis_compagnons  (id_trace,id_compagnon,prix) VALUES ('" + tc._Id + "','" + tc._Compagnon[i]._Id + "','" + tc._Prix + "')";
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            //TOTO ajouter la quantite
+            if (tc._Materiaux.Count != 0)
+            {
+                for (int i = 0; i < tc._Materiaux.Count; i++)
+                {
+                    sqlCommand.CommandText = "INSERT INTO devis_materiaux  (id_trace,id_materiaux,prix) VALUES ('" + tc._Id + "','" + tc._Materiaux[i]._Id + "','" + tc._Prix + "')";
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+        }
+        private void insertInTableAssociation2(TraceComptable tc,int id)
         {
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
 

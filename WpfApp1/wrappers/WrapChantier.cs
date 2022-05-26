@@ -26,9 +26,10 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com,telephone,date_creation,etat,zipcode,numero,date_fin) VALUES ('" + chantier._Adresse + "','" + chantier._NomChantier + "','" + chantier._Commentaire + "','" + chantier._Telephone + "','" + chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + chantier._Etat + "','" + chantier._ZipCode + "','" + chantier._Numero + "','" + chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')";
             Console.WriteLine(sqlCommand.CommandText);
-            Chantier ch = getLastChantierAdded();
             sqlCommand.ExecuteNonQuery();
-            insertInTableAssociation(ch);
+            Chantier ch = getLastChantierAdded();
+            insertInTableAssociation2(chantier,ch._Id);
+            sqlite_conn.Close();
 
 
         }
@@ -47,6 +48,8 @@ namespace WpfApp1.wrappers
                 chantier = convertDataToObject(rdr);
                 return chantier;
             }
+            sqlite_conn.Close();
+
             return chantier;
         }
         public Chantier getLastChantierAdded()
@@ -81,6 +84,36 @@ namespace WpfApp1.wrappers
                 for (int i = 0; i < chantier._compagnon.Count; i++)
                 {
                     sqlCommand.CommandText = "INSERT INTO compagnons_chantier  (id_compagnon,id_chantier,date_debut,date_fin) VALUES ('" + chantier._devis[i] + "','" + chantier._Id + "','" + chantier._DateCreation + "','" + chantier._DateFin + "')";
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+        }
+        private void insertInTableAssociation2(Chantier chantier,int id)
+        {
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+
+            if (chantier._factures != null)
+            {
+                for (int i = 0; i < chantier._factures.Count; i++)
+                {
+
+                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + chantier._factures[i]._Id + "','" + id + "')";
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            if (chantier._devis != null)
+            {
+                for (int i = 0; i < chantier._devis.Count; i++)
+                {
+                    sqlCommand.CommandText = "INSERT INTO chantier_trace  (id_trace,id_chantier) VALUES ('" + chantier._devis[i]._Id + "','" + id + "')";
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            if (chantier._compagnon != null)
+            {
+                for (int i = 0; i < chantier._compagnon.Count; i++)
+                {
+                    sqlCommand.CommandText = "INSERT INTO compagnons_chantier  (id_compagnon,id_chantier,date_debut,date_fin) VALUES ('" + chantier._devis[i] + "','" + id + "','" + chantier._DateCreation + "','" + chantier._DateFin + "')";
                     sqlCommand.ExecuteNonQuery();
                 }
             }

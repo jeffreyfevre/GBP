@@ -21,7 +21,7 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "INSERT INTO compagnon (nom,telephone,cout_horaire,date_embauche,compagnon_com,prenom) VALUES ('" + compagnon._Name + "','" + compagnon._Telephone + "','" + compagnon._CoutHoraire + "','" + compagnon._DateEmbauche.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + compagnon._Commentaire + "','" + compagnon._Prenom + "')";
             Console.WriteLine(sqlCommand.CommandText);
-            SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            sqlCommand.ExecuteNonQuery();
             Compagnon lastComp = getLastCompagnonAdded();
             for (int i = 0; i < compagnon._Chantiers.Count; i++)
             {
@@ -29,7 +29,7 @@ namespace WpfApp1.wrappers
                 sqlCommand.CommandText = "INSERT INTO compagnons_chantier  (id_chantier,id_compagnon) VALUES ('" + compagnon._Chantiers[i]._Id + "','" + lastComp._Id + "')";
                 sqlCommand.ExecuteNonQuery();
             }
-            
+            sqlite_conn.Close();
 
         }
         // A noter quand on recup les données avec GetInt32() alors que c'est un string la fonction return 0; 
@@ -40,7 +40,13 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "SELECT * FROM compagnon WHERE id_compagnon=" + id;
             SqliteDataReader rdr = sqlCommand.ExecuteReader();
-            return convertDataToObject(rdr);
+            Compagnon compagnon = new Compagnon();  
+            if (rdr.Read())
+            {
+                compagnon = convertDataToObject(rdr);
+            }
+            return compagnon;
+
         }
         public void updateCompagnon(Compagnon compagnon, int id)
         {
@@ -73,7 +79,7 @@ namespace WpfApp1.wrappers
             sqlCommand.ExecuteNonQuery();
             sqlCommand.CommandText = "DELETE FROM compagnons_chantier WHERE id_compagnon=" + id;
             sqlCommand.ExecuteNonQuery();
-            
+
 
         }
         public List<Compagnon> getAllCompagnon()
@@ -88,7 +94,9 @@ namespace WpfApp1.wrappers
                 Compagnon dev = convertDataToObject(reader);
                 listCompagnon.Add(dev);
             }
+
             return listCompagnon;
+
         }
         public List<Compagnon> searchCompagnonByName(string name)
         {
@@ -106,6 +114,7 @@ namespace WpfApp1.wrappers
                 listCompagnon.Add(compagnon);
                 Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
             }
+
             return listCompagnon;
         }
         public List<Compagnon> searchCompagnonsMultiParam(Dictionary<string, string> dic)
@@ -133,6 +142,8 @@ namespace WpfApp1.wrappers
                 Compagnon ch = convertDataToObject(reader);
                 listCompanons.Add(ch);
             }
+            sqlite_conn.Close();
+
             return listCompanons;
         }
         //je sais que je peux use le constructeur mais je pref comme ca
@@ -169,6 +180,7 @@ namespace WpfApp1.wrappers
                 Chantier chantier = wrapChantier.readChantier(listId[i]);
                 listChantiers.Add(chantier);
             }
+
             return listChantiers;
         }
         public List<TraceComptable> getAllFacturesForOneCompagnon(int id)
@@ -191,6 +203,8 @@ namespace WpfApp1.wrappers
                 TraceComptable trace = wrapTrace.readTraceComptable(listId[i]);
                 listTraces.Add(trace);
             }
+            sqlite_conn.Close();
+
             return listTraces;
         }
         private void logCompagnonfromBDD(SqliteDataReader reader)
