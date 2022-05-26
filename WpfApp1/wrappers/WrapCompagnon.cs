@@ -62,7 +62,7 @@ namespace WpfApp1.wrappers
         public Compagnon getLastCompagnonAdded()
         {
             List<Compagnon> allComp = getAllCompagnon();
-            Compagnon lastCompagnon = allComp[allComp.Count - 1];
+            Compagnon lastCompagnon = allComp.OrderByDescending(x => x._Id).FirstOrDefault();
             return lastCompagnon;
         }
         public void deleteCompagnon(int id)

@@ -26,8 +26,9 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "INSERT INTO chantier (adresse,nom_chantier,chantier_com,telephone,date_creation,etat,zipcode,numero,date_fin) VALUES ('" + chantier._Adresse + "','" + chantier._NomChantier + "','" + chantier._Commentaire + "','" + chantier._Telephone + "','" + chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + chantier._Etat + "','" + chantier._ZipCode + "','" + chantier._Numero + "','" + chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')";
             Console.WriteLine(sqlCommand.CommandText);
+            Chantier ch = getLastChantierAdded();
             sqlCommand.ExecuteNonQuery();
-            insertInTableAssociation(chantier);
+            insertInTableAssociation(ch);
 
 
         }
@@ -47,6 +48,12 @@ namespace WpfApp1.wrappers
                 return chantier;
             }
             return chantier;
+        }
+        public Chantier getLastChantierAdded()
+        {
+            List<Chantier> allchant= getAllChantier();
+            Chantier lastChantier = allchant.OrderByDescending(x => x._Id ).FirstOrDefault();
+            return lastChantier;
         }
         private void insertInTableAssociation(Chantier chantier)
         {
@@ -115,10 +122,28 @@ namespace WpfApp1.wrappers
 
             sqlCommand.CommandText = "UPDATE chantier SET adresse ='" + chantier._Adresse + "', nom_chantier ='" + chantier._NomChantier + "', chantier_com ='" + chantier._Commentaire + "' , telephone ='" + chantier._Telephone + "', date_creation = '" + chantier._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', etat = '" + chantier._Etat + "', zipcode = '" + chantier._ZipCode + "',numero= '" + chantier._Numero + "',date_fin = '" + chantier._DateFin.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' WHERE id_chantier =" + id;
             Console.WriteLine(sqlCommand.CommandText);
-            sqlCommand.ExecuteNonQuery();
+            sqlCommand.ExecuteNonQuery(); ;
+            if (chantier._devis.Count != 0)
+            {
+                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            if (chantier._factures.Count != 0)
+            {
+                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            if (chantier._compagnon.Count != 0)
+            {
+                sqlCommand.CommandText = "DELETE FROM compagnon_chantier WHERE id_chantier=" + chantier._Id;
+                sqlCommand.ExecuteNonQuery();
+
+            }
             if (chantier != null)
             {
-                updateTableAssociation(chantier, sqlCommand);
+                insertInTableAssociation(chantier);
 
             }
             //pas tres beau
@@ -132,7 +157,13 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "DELETE FROM chantier WHERE id_chantier=" + chantier._Id;
             sqlCommand.ExecuteNonQuery();
-            if (chantier._factures.Count != 0 && chantier._devis.Count != 0)
+            if (chantier._devis.Count != 0)
+            {
+                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            if (chantier._factures.Count != 0)
             {
                 sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
                 sqlCommand.ExecuteNonQuery();
