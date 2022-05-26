@@ -125,19 +125,19 @@ namespace WpfApp1.wrappers
             sqlCommand.ExecuteNonQuery(); ;
             if (chantier._devis.Count != 0)
             {
-                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
+                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + id;
                 sqlCommand.ExecuteNonQuery();
 
             }
             if (chantier._factures.Count != 0)
             {
-                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + chantier._Id;
+                sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_chantier=" + id;
                 sqlCommand.ExecuteNonQuery();
 
             }
             if (chantier._compagnon.Count != 0)
             {
-                sqlCommand.CommandText = "DELETE FROM compagnon_chantier WHERE id_chantier=" + chantier._Id;
+                sqlCommand.CommandText = "DELETE FROM compagnon_chantier WHERE id_chantier=" + id;
                 sqlCommand.ExecuteNonQuery();
 
             }

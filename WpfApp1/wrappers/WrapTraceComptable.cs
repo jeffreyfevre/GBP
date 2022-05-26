@@ -20,9 +20,10 @@ namespace WpfApp1.wrappers
             sqlite_conn.Open();
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "INSERT INTO trace_comptable (prix,date_creation,type,commentaire,temps) VALUES ('" + trace._Prix + "','" + trace._DateCreation.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + trace._Type + "','" + trace._Commentaire + "','" + trace._Temps + "')";
-            if (trace != null)
+            TraceComptable tc = getLastTraceAdded();
+            if (tc != null)
             {
-                insertInTableAssociation(trace);
+                insertInTableAssociation(tc);
             }
             Console.WriteLine(sqlCommand.CommandText);
             sqlCommand.ExecuteNonQuery();
@@ -75,6 +76,30 @@ namespace WpfApp1.wrappers
             return null;
 
         }
+        public TraceComptable getLastTraceAdded()
+        {
+            List<TraceComptable> allTrace= getAllTraceComptable();
+            TraceComptable lastTraceComptable = allTrace.OrderByDescending(x => x._Id).FirstOrDefault();
+            return lastTraceComptable;
+        }
+
+        public List<TraceComptable> getAllTraceComptable()
+        {
+
+            List<TraceComptable> listTraceComptable = new List<TraceComptable>();
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            sqlCommand.CommandText = "SELECT * FROM chantier";
+            SqliteDataReader reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+
+                TraceComptable tc = convertDataToObject(reader);
+                listTraceComptable.Add(tc);
+            }
+            return listTraceComptable;
+        }
+
         public List<TraceComptable> searchChantierByName(int prix)
         {
             sqlite_conn.Open();
@@ -123,9 +148,15 @@ namespace WpfApp1.wrappers
 
             sqlCommand.CommandText = "UPDATE trace_comptable SET prix = '" + tc._Prix + "', date_creation = '" + tc._DateCreation + "', type = '" + tc._Type + "', commentaire ='" + tc._Commentaire + "' ,temps ='" + tc._Temps + "'  WHERE id = " + tc._Id;
             sqlCommand.ExecuteNonQuery();
+            sqlCommand.CommandText = "DELETE FROM chantier_trace WHERE id_trace=" + tc._Id;
+            sqlCommand.ExecuteNonQuery();
+            sqlCommand.CommandText = "DELETE FROM devis_compagnons WHERE id_trace=" + tc._Id;
+            sqlCommand.ExecuteNonQuery();
+            sqlCommand.CommandText = "DELETE FROM devis_materiaux WHERE id_trace=" + tc._Id;
+            sqlCommand.ExecuteNonQuery();
             if (tc != null)
             {
-                updateTableAssociation(tc, sqlCommand);
+                insertInTableAssociation(tc);
             }
 
         }
