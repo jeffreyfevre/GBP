@@ -52,6 +52,22 @@ namespace WpfApp1.wrappers
 
             return chantier;
         }
+        public Chantier readChantierListless(int id)
+        {
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            sqlCommand.CommandText = "SELECT * FROM chantier WHERE id_chantier=" + id;
+            SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            Chantier chantier = new Chantier();
+            if (rdr.Read())
+            {
+                chantier = convertDataToObjectListless(rdr);
+                return chantier;
+            }
+            sqlite_conn.Close();
+
+            return chantier;
+        }
         public Chantier getLastChantierAdded()
         {
             List<Chantier> allchant= getAllChantier();
@@ -118,34 +134,7 @@ namespace WpfApp1.wrappers
                 }
             }
         }
-        private void updateTableAssociation(Chantier chantier, SqliteCommand sqlCommand)
-        {
-            if (chantier._factures.Count != 0)
-            {
-                for (int i = 0; i < chantier._factures.Count; i++)
-                {
-                    sqlCommand.CommandText = "UPDATE chantier_trace SET id_trace = '" + chantier._factures[i]._Id + "', id_chantier = '" + chantier._Id + "' WHERE id_chantier = '" + chantier._Id + "' AND id_trace = " + chantier._factures[i]._Id;
-                    sqlCommand.ExecuteNonQuery();
-                }
-            }
-            if (chantier._devis.Count != 0)
-            {
-                for (int i = 0; i < chantier._devis.Count; i++)
-                {
-                    sqlCommand.CommandText = "UPDATE chantier_trace SET id_trace = '" + chantier._devis[i]._Id + "', id_chantier = '" + chantier._Id + "' WHERE id_chantier = '" + chantier._Id + "' AND id_trace = " + chantier._devis[i]._Id;
-                    sqlCommand.ExecuteNonQuery();
-                }
-            }
-            if (chantier._compagnon.Count != 0)
-            {
-                for (int i = 0; i < chantier._compagnon.Count; i++)
-                {
-                    sqlCommand.CommandText = "UPDATE compagnons_chantier SET id_compagnon = '" + chantier._compagnon[i]._Id + "', id_chantier = '" + chantier._Id + "' WHERE id_chantier = '" + chantier._Id + "' AND id_compagnon = " + chantier._compagnon[i]._Id;
-                    sqlCommand.ExecuteNonQuery();
-                }
-            }
-
-        }
+        
         //TODO update
         public void updateChantier(Chantier chantier, int id)
         {
@@ -300,6 +289,23 @@ namespace WpfApp1.wrappers
             chantier._compagnon = getAllCompagnonsForOneChantier(chantier._Id);
             return chantier;
         }
+        private Chantier convertDataToObjectListless(SqliteDataReader reader)
+        {
+            Chantier chantier = new Chantier();
+
+            chantier._Id = reader.GetInt32(0);
+            chantier._Adresse = reader.GetString(1);
+            chantier._NomChantier = reader.GetString(2);
+            chantier._Commentaire = reader.GetString(3);
+            chantier._Telephone = reader.GetString(4);
+            chantier._DateCreation = reader.GetDateTime(5);
+            chantier._Etat = (State)reader.GetInt32(6);
+            chantier._ZipCode = reader.GetString(7);
+            chantier._Numero = reader.GetString(8);
+            chantier._DateFin = reader.GetDateTime(9);
+            
+            return chantier;
+        }
 
         public List<TraceComptable> getAllFactureForOneChantier(int id)
         {
@@ -319,7 +325,7 @@ namespace WpfApp1.wrappers
             for (int i = 0; i < listId.Count; i++)
             {
                 //je vois pas l'interet de faire ca 
-                TraceComptable facture = wrapTrace.readTraceComptable(listId[i]);
+                TraceComptable facture = wrapTrace.readTraceComptableWithOutList(listId[i]);
                 if (facture != null && facture._Type == 0)
                 {
                     listTrace.Add(facture);
@@ -345,7 +351,7 @@ namespace WpfApp1.wrappers
             for (int i = 0; i < listId.Count; i++)
             {
                 //je vois pas l'interet de faire ca 
-                TraceComptable devis = wrapTrace.readTraceComptable(listId[i]);
+                TraceComptable devis = wrapTrace.readTraceComptableWithOutList(listId[i]);
                 if (devis != null && devis._Type == 0)
                 {
                     listTrace.Add(devis);
@@ -371,19 +377,10 @@ namespace WpfApp1.wrappers
             List<Compagnon> listFacture = new List<Compagnon>();
             for (int i = 0; i < listId.Count; i++)
             {
-                Compagnon compagnon = wrapFacture.getAllCompagnon().Where(x => x._Id == listId[i]).FirstOrDefault();
+                Compagnon compagnon = wrapFacture.readCompagnonListLess(listId[i]);
                 listFacture.Add(compagnon);
             }
             return listFacture;
-        }
-
-
-        private void logChantierfromReader(SqliteDataReader reader)
-        {
-            while (reader.Read())
-            {
-                Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
-            }
         }
 
     }

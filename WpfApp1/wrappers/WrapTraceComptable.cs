@@ -102,9 +102,23 @@ namespace WpfApp1.wrappers
             SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
             sqlCommand.CommandText = "SELECT * FROM trace_comptable WHERE id=" + id;
             SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            TraceComptable tc =  new TraceComptable();
             if (rdr.Read())
             {
-                TraceComptable tc = convertDataToObject(rdr);
+                tc = convertDataToObject(rdr);
+            }
+            return tc;
+
+        }
+        public TraceComptable readTraceComptableWithOutList(int id)
+        {
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            sqlCommand.CommandText = "SELECT * FROM trace_comptable WHERE id=" + id;
+            SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            if (rdr.Read())
+            {
+                TraceComptable tc = convertDataToObjectWithOutList(rdr);
                 return tc;
             }
             return null;
@@ -223,6 +237,17 @@ namespace WpfApp1.wrappers
 
             return trace;
         }
+        private TraceComptable convertDataToObjectWithOutList(SqliteDataReader reader)
+        {
+            TraceComptable trace = new TraceComptable();
+            trace._Id = reader.GetInt32(0);
+            trace._Prix = reader.GetInt32(1);
+            trace._DateCreation = reader.GetDateTime(2);
+            trace._Type = (Types)reader.GetInt32(3);
+            trace._Temps = reader.GetInt32(5);
+            trace._Commentaire = reader.GetString(4);
+            return trace;
+        }
 
         public List<TraceComptable> getAllFacture()
         {
@@ -291,7 +316,7 @@ namespace WpfApp1.wrappers
             List<Compagnon> listComp = new List<Compagnon>();
             for (int i = 0; i < listId.Count; i++)
             {
-                Compagnon comp = wrapComp.readCompagnon(listId[i]);
+                Compagnon comp = wrapComp.readCompagnonListLess(listId[i]);
                 listComp.Add(comp);
             }
             return listComp;
@@ -313,7 +338,7 @@ namespace WpfApp1.wrappers
             List<Chantier> listChant = new List<Chantier>();
             for (int i = 0; i < listId.Count; i++)
             {
-                Chantier chant = wrapChant.readChantier(listId[i]);
+                Chantier chant = wrapChant.readChantierListless(listId[i]);
                 listChant.Add(chant);
             }
             return listChant;
@@ -345,41 +370,6 @@ namespace WpfApp1.wrappers
             }
             return listTrace;
         }
-        private void updateTableAssociation(TraceComptable tc, SqliteCommand sqlCommand)
-        {
-            if (tc._Compagnon.Count != 0)
-            {
-                for (int i = 0; i < tc._Compagnon.Count; i++)
-                {
-                    sqlCommand.CommandText = "UPDATE devis_compagnons SET id_trace = '" + tc._Id + "', id_compagnon = '" + tc._Compagnon[i]._Id + "', prix = '" + tc._Prix + "' WHERE id_compagnon = '" + tc._Compagnon[i]._Id + "' AND id_trace = " + tc._Id;
-                    sqlCommand.ExecuteNonQuery();
-                }
-            }
-            if (tc._Chantiers.Count != 0)
-            {
-                for (int i = 0; i < tc._Chantiers.Count; i++)
-                {
-                    sqlCommand.CommandText = "UPDATE chantier_trace SET id_trace = '" + tc._Id + "', id_chantier = '" + tc._Chantiers[i]._Id + "' WHERE id_chantier = '" + tc._Chantiers[i]._Id + "' AND id_trace = " + tc._Id;
-                    sqlCommand.ExecuteNonQuery();
-                }
-            }
-            //TODO ajouter la quantite
-            if (tc._Materiaux.Count != 0)
-            {
-                for (int i = 0; i < tc._Materiaux.Count; i++)
-                {
-                    sqlCommand.CommandText = "UPDATE devis_materieux SET id_trace = '" + tc._Id + "', id_materiaux = '" + tc._Materiaux[i]._Id + "', prix = '" + tc._Prix + "' WHERE id_trace = '" + tc._Id + "' AND id_materiaux = " + tc._Materiaux[i]._Id;
-                    sqlCommand.ExecuteNonQuery();
-                }
-            }
-
-        }
-        private void logFacturefromBDD(SqliteDataReader reader)
-        {
-            while (reader.Read())
-            {
-                Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
-            }
-        }
+        
     }
 }

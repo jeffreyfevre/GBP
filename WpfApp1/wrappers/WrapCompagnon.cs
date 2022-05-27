@@ -48,6 +48,20 @@ namespace WpfApp1.wrappers
             return compagnon;
 
         }
+        public Compagnon readCompagnonListLess(int id)
+        {
+            sqlite_conn.Open();
+            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
+            sqlCommand.CommandText = "SELECT * FROM compagnon WHERE id_compagnon=" + id;
+            SqliteDataReader rdr = sqlCommand.ExecuteReader();
+            Compagnon compagnon = new Compagnon();
+            if (rdr.Read())
+            {
+                compagnon = convertDataToObjectListLess(rdr);
+            }
+            return compagnon;
+
+        }
         public void updateCompagnon(Compagnon compagnon, int id)
         {
             sqlite_conn.Open();
@@ -79,8 +93,6 @@ namespace WpfApp1.wrappers
             sqlCommand.ExecuteNonQuery();
             sqlCommand.CommandText = "DELETE FROM compagnons_chantier WHERE id_compagnon=" + id;
             sqlCommand.ExecuteNonQuery();
-
-
         }
         public List<Compagnon> getAllCompagnon()
         {
@@ -160,6 +172,18 @@ namespace WpfApp1.wrappers
 
             return compagnon;
         }
+        private Compagnon convertDataToObjectListLess(SqliteDataReader reader)
+        {
+            Compagnon compagnon = new Compagnon();
+            compagnon._Id = reader.GetInt32(0);
+            compagnon._Name = reader.GetString(1);
+            compagnon._Telephone = reader.GetString(2);
+            compagnon._CoutHoraire = reader.GetInt32(3);
+            compagnon._DateEmbauche = reader.GetDateTime(4);
+            compagnon._Commentaire = reader.GetString(5);
+
+            return compagnon;
+        }
         public List<Chantier> getAllChantiersForOneCompagnon(int id)
         {
             sqlite_conn.Open();
@@ -177,42 +201,13 @@ namespace WpfApp1.wrappers
             List<Chantier> listChantiers = new List<Chantier>();
             for (int i = 0; i < listId.Count; i++)
             {
-                Chantier chantier = wrapChantier.readChantier(listId[i]);
+                Chantier chantier = wrapChantier.readChantierListless(listId[i]);
                 listChantiers.Add(chantier);
             }
 
             return listChantiers;
         }
-        public List<TraceComptable> getAllFacturesForOneCompagnon(int id)
-        {
-            sqlite_conn.Open();
-            SqliteCommand sqlCommand = sqlite_conn.CreateCommand();
-            List<int> listId = new List<int>();
-            sqlCommand.CommandText = "SELECT * FROM compagnons_chantier WHERE Id=" + id;
-            SqliteDataReader reader = sqlCommand.ExecuteReader();
-
-            while (reader.Read())
-            {
-                int idGet = reader.GetInt32(0);
-                listId.Add(idGet);
-            }
-            WrapTraceComptable wrapTrace = new WrapTraceComptable();
-            List<TraceComptable> listTraces = new List<TraceComptable>();
-            for (int i = 0; i < listId.Count; i++)
-            {
-                TraceComptable trace = wrapTrace.readTraceComptable(listId[i]);
-                listTraces.Add(trace);
-            }
-            sqlite_conn.Close();
-
-            return listTraces;
-        }
-        private void logCompagnonfromBDD(SqliteDataReader reader)
-        {
-            while (reader.Read())
-            {
-                Console.WriteLine($@"{reader.GetInt32(0)} {reader.GetString(1)} {reader.GetString(2)} {reader.GetString(3)}");
-            }
-        }
+        
+        
     }
 }
